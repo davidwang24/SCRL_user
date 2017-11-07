@@ -1,0 +1,4 @@
+*.log
+build/
+app/node_modules/
+.vscode/

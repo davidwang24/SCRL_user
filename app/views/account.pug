@@ -1,0 +1,19 @@
+extends layout.pug
+block appContent
+    h2 account list of #{articles.length}
+    table
+        tr
+            th no
+            th name
+            th token
+            th eth account
+        - for(var x=0;x<articles.length;x++)
+            tr
+                td #{x+1}
+                td #{articles[x].name}
+                td #{articles[x].token}
+                td #{accounts[x]}
+    br
+    button#myButton.float-left.submit-button(onclick="location.href = './account/add';") Add Account
+    button del
+    br
