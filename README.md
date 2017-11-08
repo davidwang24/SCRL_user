@@ -4,11 +4,37 @@ supply chain finance solutions with block chain
 
 ## Installation
 
-Use command prompt to install npm in app folder : `npm install`
+testrpc
+```sh
+$ npm install -g ethereumjs-testrpc
+```
+
+truffleframework
+```sh
+$ npm install -g truffle
+```
+
+```sh
+$ npm install
+```
+
+Run app
+```sh
+$ testrpc
+```
+
+```sh
+$ truffle compile
+$ truffle migrate
+```
+
+```sh
+$ npm start
+```
 
 ## Tests
 
-Test with Ethereum client for testing `testrpc`, node.js `nodemon` and mongodb
+Test with Ethereum client for testing node.js and mongodb
 
 ## License
 
