@@ -1,0 +1,21 @@
+extends layout.pug
+block appContent
+    h2 Edit User
+    fieldset
+        legend User Registration:
+        form(method='POST', action='/info/edit/'+user.id)
+            #from-group
+                label Username:
+                input#email.form-control(type='text', placeholder='Enter username', name='username', value=user.username)
+            #from-group
+                label(for='pwd') Password:
+                input#pwd.form-control(type='password', placeholder='Enter password', name='password', value=user.password)
+            #from-group
+                label Name:
+                input#email.form-control(type='text', placeholder='Enter name', name='name', value=user.name)
+            #from-group
+                label(for='email') Email:
+                input#email.form-control(type='email', placeholder='Enter email', name='email', value=user.email)
+            br
+            input.btn.btn-primary(type="submit",value='Submit')
+            a.btn.btn-danger(href='/info/'+user.id, role='button') Cancel

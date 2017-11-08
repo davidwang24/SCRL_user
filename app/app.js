@@ -83,6 +83,46 @@ app.get('/info/:id', function(req, res){
     });
 });
 
+// load edit
+app.get('/info/edit/:id', function(req, res){
+    UserTB.findById(req.params.id, function(err, user){
+        res.render('edit_info',{
+            user: user
+        });
+    });
+});
+
+// update
+app.post('/info/edit/:id', function (req, res) {
+    var user={};
+    user.username = req.body.username;
+    user.password = req.body.password;
+    user.name = req.body.name;
+    user.email = req.body.email;
+
+    var query = {_id:req.params.id}
+
+    UserTB.update(query,user,function(err){
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/info/'+req.params.id);
+        }
+    });
+});
+
+app.delete('/info/:id',function(req, res){
+    var query = {_id:req.params.id}
+
+    UserTB.remove(query,function(err){
+        if(err){
+            console.log(err);
+        }else{
+            res.send('Success');
+        }
+    });
+});
+
 app.get('/register', function (req, res) {
     res.render('register');
 });

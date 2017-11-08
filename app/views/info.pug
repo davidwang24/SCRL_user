@@ -1,11 +1,10 @@
 extends layout.pug
 block appContent
     h2 Information of #{user.name}
-    form(method='POST', action='/info/:id')
-        p Username : #{user.username}
-        p Password : #{user.password}
-        p Email : #{user.email}
-        br
-        input.btn.btn-danger(type="submit",value='Delete Account')
-        a.btn.btn-primary(href='/info/edit'+user._id, role='button') Edit Account
-        a.btn.btn-default(href='/account', role='button') Back
+    p Username : #{user.username}
+    p Password : #{user.password}
+    p Email : #{user.email}
+    br
+    a.btn.btn-primary(href='/info/edit/'+user._id) Edit Account
+    a.btn.btn-danger.delete-user(href='#' ,data-id=user._id, role='button') Delete Account
+    a.btn.btn-default(href='/account', role='button') Back
