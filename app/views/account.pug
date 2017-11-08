@@ -1,19 +1,17 @@
 extends layout.pug
 block appContent
-    h2 account list of #{articles.length}
-    table
-        tr
-            th no
-            th name
-            th token
-            th eth account
-        - for(var x=0;x<articles.length;x++)
+    h2 Account list of #{articles.length}
+    table.table.table-condensed
+        thead
             tr
-                td #{x+1}
-                td #{articles[x].name}
-                td #{articles[x].token}
-                td #{accounts[x]}
-    br
-    button#myButton.float-left.submit-button(onclick="location.href = './account/add';") Add Account
-    button del
+                th No.
+                th Name
+                th ETH Account
+        tbody
+            - for(var x=0;x<articles.length;x++)
+                tr
+                    td #{x+1}
+                    td 
+                        a(href="/info/"+articles[x]._id) #{articles[x].name}
+                    td #{accounts[x]}
     br

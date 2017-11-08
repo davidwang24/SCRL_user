@@ -26,16 +26,12 @@ Token.deployed().then(function (instance) {
     });
 });
 
+// set public folder
+app.use(express.static('public'))
+
 mongoose.connect('mongodb://localhost/UserDB', { useMongoClient: true });
 mongoose.Promise = global.Promise;
-
-var Schema = mongoose.Schema({ name: String, token: Number, ethacc: String});
-var UserTB = mongoose.model('UserTB',Schema);
-// add user
-/*var add = new UserTB({ name: 'lolol', token: 500, ethacc:'XXXXX'});
-add.save(function (err) {
-  if (err) console.log(err);
-});*/
+var UserTB = require('./models/schema');
 
 // load view engine
 app.set('view engine', 'pug');
@@ -44,6 +40,12 @@ app.set('view engine', 'pug');
 app.get('/', function (req, res) {
     res.render('index');
 });
+
+app.post('/', function (req, res) {
+    if(req.body.username=="admin"&&req.body.password=="admin"){
+        res.redirect('/account');
+    }else res.redirect('/')
+    });
 
 app.get('/account', function (req, res) {
     UserTB.find(function (err, article) {
@@ -59,18 +61,46 @@ app.get('/account', function (req, res) {
     });
 });
 
-app.get('/account/add', function (req, res) {
+app.get('/account/delete', function (req, res) {
     UserTB.find(function (err, article) {
         if(err){
             console.log(err);
         } else {
             var account = web3.eth.accounts;
-            res.render('add', {
+            res.render('delete', {
                 articles: article,
                 accounts: account
             });
         }
     });
+});
+
+app.get('/info/:id', function(req, res){
+    UserTB.findById(req.params.id, function(err, user){
+        res.render('info',{
+            user: user
+        });
+    });
+});
+
+app.get('/register', function (req, res) {
+    res.render('register');
+});
+
+app.post('/register', function (req, res) {
+    var user = new UserTB();
+    user.username = req.body.username;
+    user.password = req.body.password;
+    user.name = req.body.name;
+    user.email = req.body.email;
+
+    user.save(function(err){
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/account');
+        }
+    })
 });
 
 app.post('/token/deposit', function(req, res) {
