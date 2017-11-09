@@ -5,6 +5,6 @@ block appContent
     p Password : #{user.password}
     p Email : #{user.email}
     br
-    a.btn.btn-primary(href='/info/edit/'+user._id) Edit Account
+    a.btn.btn-primary(href='/account/edit/'+user._id) Edit Account
     a.btn.btn-danger.delete-user(href='#' ,data-id=user._id, role='button') Delete Account
     a.btn.btn-secondary(href='/account', role='button') Back

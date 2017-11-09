@@ -5,6 +5,9 @@ var Web3 = require('web3');
 var contract = require('truffle-contract');
 var tokenContract = require('./../build/contracts/Token.json');
 var mongoose = require('mongoose');
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var session = require('express-session');
 
 var port = process.env.PORT || 3000;
 var app = express();
@@ -29,9 +32,42 @@ Token.deployed().then(function (instance) {
 // set public folder
 app.use(express.static('public'))
 
+// express session middleware
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
+
+// express messages middleware
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
+// express validator middleware
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+        , root    = namespace.shift()
+        , formParam = root;
+  
+      while(namespace.length) {
+        formParam += '[' + namespace.shift() + ']';
+      }
+      return {
+        param : formParam,
+        msg   : msg,
+        value : value
+      };
+    }
+}));
+
 mongoose.connect('mongodb://localhost/UserDB', { useMongoClient: true });
 mongoose.Promise = global.Promise;
-var UserTB = require('./models/schema');
+// bring in models
+var UserTB = require('./models/user_model');
 
 // load view engine
 app.set('view engine', 'pug');
@@ -47,101 +83,9 @@ app.post('/', function (req, res) {
     }else res.redirect('/')
     });
 
-app.get('/account', function (req, res) {
-    UserTB.find(function (err, article) {
-        if(err){
-            console.log(err);
-        } else {
-            var account = web3.eth.accounts;
-            res.render('account', {
-                articles: article,
-                accounts: account
-            });
-        }
-    });
-});
-
-app.get('/account/delete', function (req, res) {
-    UserTB.find(function (err, article) {
-        if(err){
-            console.log(err);
-        } else {
-            var account = web3.eth.accounts;
-            res.render('delete', {
-                articles: article,
-                accounts: account
-            });
-        }
-    });
-});
-
-app.get('/info/:id', function(req, res){
-    UserTB.findById(req.params.id, function(err, user){
-        res.render('info',{
-            user: user
-        });
-    });
-});
-
-// load edit
-app.get('/info/edit/:id', function(req, res){
-    UserTB.findById(req.params.id, function(err, user){
-        res.render('edit_info',{
-            user: user
-        });
-    });
-});
-
-// update
-app.post('/info/edit/:id', function (req, res) {
-    var user={};
-    user.username = req.body.username;
-    user.password = req.body.password;
-    user.name = req.body.name;
-    user.email = req.body.email;
-
-    var query = {_id:req.params.id}
-
-    UserTB.update(query,user,function(err){
-        if(err){
-            console.log(err);
-        }else{
-            res.redirect('/info/'+req.params.id);
-        }
-    });
-});
-
-app.delete('/info/:id',function(req, res){
-    var query = {_id:req.params.id}
-
-    UserTB.remove(query,function(err){
-        if(err){
-            console.log(err);
-        }else{
-            res.send('Success');
-        }
-    });
-});
-
-app.get('/register', function (req, res) {
-    res.render('register');
-});
-
-app.post('/register', function (req, res) {
-    var user = new UserTB();
-    user.username = req.body.username;
-    user.password = req.body.password;
-    user.name = req.body.name;
-    user.email = req.body.email;
-
-    user.save(function(err){
-        if(err){
-            console.log(err);
-        }else{
-            res.redirect('/account');
-        }
-    })
-});
+// router files
+app.use('/account', require('./routers/account'));
+app.use('/user', require('./routers/user'));
 
 app.post('/token/deposit', function(req, res) {
     var from = req.body.from;

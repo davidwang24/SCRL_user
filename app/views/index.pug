@@ -1,14 +1,3 @@
 extends layout.pug
 block appContent
     h2 Main program
-    fieldset
-        legend Login:
-        form(method='POST', action='./')
-            #from-group
-                label(for='text') Username:
-                input#email.form-control(type='text', placeholder='Enter username', name='username')
-            #from-group
-                label(for='pwd') Password:
-                input#pwd.form-control(type='password', placeholder='Enter password', name='password')
-            br
-            input.btn.btn-primary(type="submit",value='Login')

@@ -2,8 +2,8 @@ extends layout.pug
 block appContent
     h2 Add New User
     fieldset
-        legend User Registration:
-        form(method='POST', action='/register')
+        legend User Registration
+        form(method='POST', action='/user/register')
             #from-group
                 label Username:
                 input#email.form-control(type='text', placeholder='Enter username', name='username')
@@ -11,11 +11,14 @@ block appContent
                 label(for='pwd') Password:
                 input#pwd.form-control(type='password', placeholder='Enter password', name='password')
             #from-group
+                label(for='pwd') Confirm password:
+                input#pwd.form-control(type='password', placeholder='Enter password again', name='password2')
+            #from-group
                 label Name:
                 input#email.form-control(type='text', placeholder='Enter name', name='name')
             #from-group
                 label(for='email') Email:
-                input#email.form-control(type='email', placeholder='Enter email', name='email')
+                input#email.form-control(type='text', placeholder='Enter email', name='email')
             br
             input.btn.btn-primary(type="submit",value='Submit')
-            a.btn.btn-danger(href='./', role='button') Cancel
+            a.btn.btn-danger(href='../', role='button') Cancel

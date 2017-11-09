@@ -3,7 +3,7 @@ block appContent
     h2 Edit User
     fieldset
         legend User Registration:
-        form(method='POST', action='/info/edit/'+user.id)
+        form(method='POST', action='/account/edit/'+user.id)
             #from-group
                 label Username:
                 input#email.form-control(type='text', placeholder='Enter username', name='username', value=user.username)
@@ -18,4 +18,4 @@ block appContent
                 input#email.form-control(type='email', placeholder='Enter email', name='email', value=user.email)
             br
             input.btn.btn-primary(type="submit",value='Submit')
-            a.btn.btn-danger(href='/info/'+user.id, role='button') Cancel
+            a.btn.btn-danger(href='/account/'+user.id, role='button') Cancel
