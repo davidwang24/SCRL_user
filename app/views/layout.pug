@@ -2,10 +2,29 @@ doctype html
 html(lang="eng")
     head
         title SCF Solution
-        link(rel='stylesheet' href='/css/bootstrap.css')
+        link(rel='stylesheet' href='/css/bootstrap.min.css')
         link(rel='stylesheet' href='/css/style.css')
+        link(rel='icon' href='images/favicon.ico')
     body
-        h1 SCF Solution
+        nav.navbar.navbar-expand-md.navbar-dark.bg-primary.fixed-top
+            a.navbar-brand(href='/') SCF Solution
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbarsExampleDefault.collapse.navbar-collapse
+                ul.navbar-nav.mr-auto
+                    li.nav-item
+                        a.nav-link(href='/register') Add 
+                    li.nav-item
+                        a.nav-link(href='/account') Account
+                //    
+                    li.nav-item
+                        a.nav-link(href='#') Disabled
+                    li.nav-item.dropdown
+                        a#dropdown01.nav-link.dropdown-toggle(href='http://example.com', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Dropdown
+                        .dropdown-menu(aria-labelledby='dropdown01')
+                            a.dropdown-item(href='#') Action
+                            a.dropdown-item(href='#') Another action
+                            a.dropdown-item(href='#') Something else here
         .container
             block appContent
             br
@@ -14,5 +33,5 @@ html(lang="eng")
                 center
                     p Copyright &copy; 2017
         script(src='/js/jquery-3.2.1.min.js')
-        script(src='/js/bootstrap.js')
+        script(src='/js/bootstrap.min.js')
         script(src='/js/main.js')
