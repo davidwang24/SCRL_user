@@ -3,6 +3,7 @@ var router = express.Router();
 var bcrypt = require('bcryptjs');
 var Web3 = require('web3');
 var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+var passport = require('passport');
 
 // bring in models
 var UserTB = require('../models/user_model');
@@ -52,7 +53,7 @@ router.post('/register', function (req, res) {
                     return;
                 }else{
                     req.flash('success','You are now registered and can log in');
-                    res.redirect('../');
+                    res.redirect('/user/login');
                 }
                 });
             });
@@ -64,6 +65,20 @@ router.post('/register', function (req, res) {
 router.get('/login', function(req, res){
     res.render('login');
 });
-  
 
+// login process
+router.post('/login', function(req, res, next){
+    passport.authenticate('local', {
+        successRedirect:'/',
+        failureRedirect:'/user/login',
+        failureFlash: true
+    })(req, res, next);
+});
+
+// logout
+router.get('/logout', function(req, res){
+    req.logout();
+    req.flash('success', 'You are logged out');
+    res.redirect('/user/login');
+});
 module.exports = router;

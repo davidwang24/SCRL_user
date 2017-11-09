@@ -23,10 +23,14 @@ html(lang="eng")
                     li.nav-item
                         a.nav-link(href='/account') Account
                 ul.nav.navbar-nav.navbar-right
-                    li.nav-item
-                        a.nav-link(href='/user/register') Register
-                    li.nav-item
-                        a.nav-link(href='/user/login') Login
+                    if user
+                        li.nav-item
+                            a.nav-link(href='/user/logout') Logout
+                    else
+                        li.nav-item
+                            a.nav-link(href='/user/register') Register
+                        li.nav-item
+                            a.nav-link(href='/user/login') Login
                 //    
                     li.nav-item
                         a.nav-link(href='#') Disabled

@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var session = require('express-session');
+var config = require('./config/database');
+var passport = require('passport');
 
 var port = process.env.PORT || 3000;
 var app = express();
@@ -64,7 +66,19 @@ app.use(expressValidator({
     }
 }));
 
-mongoose.connect('mongodb://localhost/UserDB', { useMongoClient: true });
+// passport config
+require('./config/passport')(passport);
+
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('*', function(req, res, next){
+    res.locals.user = req.user || null;
+    next();
+});
+
+mongoose.connect(config.database, { useMongoClient: true });
 mongoose.Promise = global.Promise;
 // bring in models
 var UserTB = require('./models/user_model');
