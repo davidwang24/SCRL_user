@@ -20,8 +20,9 @@ html(lang="eng")
                 span.navbar-toggler-icon
             #navbarsExampleDefault.collapse.navbar-collapse
                 ul.navbar-nav.mr-auto
-                    li.nav-item
-                        a.nav-link(href='/account') Account
+                    if user
+                        li.nav-item
+                            a.nav-link(href='/account') Account
                 ul.nav.navbar-nav.navbar-right
                     if user
                         li.nav-item
