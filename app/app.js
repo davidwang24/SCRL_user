@@ -1,35 +1,29 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var moment = require('moment');
-var Web3 = require('web3');
-var contract = require('truffle-contract');
-var tokenContract = require('./../build/contracts/Token.json');
-var mongoose = require('mongoose');
-var expressValidator = require('express-validator');
-var flash = require('connect-flash');
-var session = require('express-session');
-var config = require('./config/database');
-var passport = require('passport');
+const express = require('express');
+const bodyParser = require('body-parser');
+const moment = require('moment');
+const Web3 = require('web3');
+const contract = require('truffle-contract');
+const mongoose = require('mongoose');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
+const config = require('./config/database');
 
 var port = process.env.PORT || 3000;
-var app = express();
+const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(bodyParser.urlencoded({extended: true}));
 var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
-var token;
-// setup contract
-var Token = contract(tokenContract);
-Token.setProvider(web3.currentProvider);
-// initialize contract
-Token.deployed().then(function (instance) {
-    token = instance;
-    app.listen(port, function () {
-        console.log('Example app listening on port ' + port)
-    });
-});
+mongoose.connect(config.database, { useMongoClient: true });
+mongoose.Promise = global.Promise;
+
+// bring in models
+var UserTB = require('./models/company');
+
+// load view engine
+app.set('view engine', 'pug');
 
 // set public folder
 app.use(express.static('public'))
@@ -78,71 +72,16 @@ app.get('*', function(req, res, next){
     next();
 });
 
-mongoose.connect(config.database, { useMongoClient: true });
-mongoose.Promise = global.Promise;
-// bring in models
-var UserTB = require('./models/user_model');
-
-// load view engine
-app.set('view engine', 'pug');
-
 // home route
 app.get('/', function (req, res) {
     res.render('index');
 });
 
-app.post('/', function (req, res) {
-    if(req.body.username=="admin"&&req.body.password=="admin"){
-        res.redirect('/account');
-    }else res.redirect('/')
-    });
-
 // router files
-app.use('/account', require('./routers/account'));
-app.use('/user', require('./routers/user'));
+app.use('/companys', require('./routers/companys'));
+app.use('/users', require('./routers/users'));
 
-app.post('/token/deposit', function(req, res) {
-    var from = req.body.from;
-    var txref = req.body.txref;
-    var amount = req.body.amount;
-
-    token.deposit(txref, amount, {
-        from: from
-    }).then(function (v){
-        res.send(v);
-    }).catch(function (err){
-        res.send(err);
-    });
-});
-
-app.post('/token/transfer', function (req, res) {
-    var from = req.body.from
-    var to = req.body.to;
-    var amount = req.body.amount;
-    //Token.web3.personal.unlockAccount(from, 'Password123');
-    token.transfer(to, amount, {
-        from: from
-    }).then(function (v) {
-        res.send(v);
-    }).catch(function (err) {
-        res.send(err);
-    });
-});
-
-app.get('/account/:addr', function (req, res) {
-    var addr = req.params.addr;
-    var balance = {};
-    var eth_balance = web3.eth.getBalance(addr);
-    balance.eth = web3.fromWei(eth_balance, 'ether').toString(10);
-    // get token balance
-    token.balanceOf.call(addr).then(function (b) {
-        balance.token = b.toNumber();
-        res.send(balance);
-    });
-});
-
-app.get('/block/:num', function(req, res){
-    var num = req.params.num;
-    var block = web3.eth.getBlock(num);
-    return res.send(block);
-});
+// Start Server
+app.listen(3000, function(){
+    console.log('Server started on port 3000...');
+  });

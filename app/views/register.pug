@@ -1,23 +1,23 @@
-extends layout.pug
-block appContent
-    fieldset
-        legend User Registration
-        form(method='POST', action='/user/register')
-            #from-group
-                label Username:
-                input#email.form-control(type='text', placeholder='Enter username', name='username')
-            #from-group
-                label(for='pwd') Password:
-                input#pwd.form-control(type='password', placeholder='Enter password', name='password')
-            #from-group
-                label(for='pwd') Confirm password:
-                input#pwd.form-control(type='password', placeholder='Enter password again', name='password2')
-            #from-group
-                label Name:
-                input#email.form-control(type='text', placeholder='Enter name', name='name')
-            #from-group
-                label(for='email') Email:
-                input#email.form-control(type='text', placeholder='Enter email', name='email')
-            br
-            input.btn.btn-primary(type="submit",value='Submit')
-            a.btn.btn-danger(href='../', role='button') Cancel
+extends layout
+
+block content
+    h1 Register
+    form(method='POST', action='/users/register')
+        #form-group
+            label Name:
+            input.form-control(name='name', type='text')
+        #form-group
+            label Email:
+            input.form-control(name='email', type='text')
+        #form-group
+            label Username:
+            input.form-control(name='username',type='text')
+        #form-group
+            label Password:
+            input.form-control(name='password',type='password')
+        #form-group
+            label Confirm:
+            input.form-control(name='password2',type='password')
+        br
+        input.btn.btn-primary(type='submit',value='Submit')
+        a.btn.btn-danger(href='../', role='button') Cancel

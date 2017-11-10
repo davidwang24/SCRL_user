@@ -1,14 +1,14 @@
-extends layout.pug
-block appContent
-    fieldset
-        legend Login
-        form(method='POST', action='./login')
-            #from-group
-                label(for='text') Username:
-                input#email.form-control(type='text', placeholder='Enter username', name='username')
-            #from-group
-                label(for='pwd') Password:
-                input#pwd.form-control(type='password', placeholder='Enter password', name='password')
-            br
-            input.btn.btn-primary(type="submit",value='Login')
-            a.btn.btn-secondary(href='../', role='button') Back
+extends layout
+
+block content
+    h1 Login
+    form(method='POST', action='/users/login')
+        #form-group
+            label Username:
+            input.form-control(name='username',type='text')
+        #form-group
+            label Password:
+            input.form-control(name='password',type='password')
+        br
+        input.btn.btn-primary(type='submit',value='Submit')
+        a.btn.btn-secondary(href='../', role='button') Back

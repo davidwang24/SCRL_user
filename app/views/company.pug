@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= company.title
+  h5 Written by #{author}
+  p= company.body
+  hr
+  if user
+    if user.id ==company.author
+        a.btn.btn-default(href='/companys/edit/'+company._id) Edit 
+        a.btn.btn-danger.delete-company(href='#',data-id=company._id) Delete
