@@ -6,6 +6,21 @@ let Company = require('../models/company');
 // user model
 let User = require('../models/user');
 
+router.get('/', function(req, res){
+  let temp = req.user._id;
+  Company.find({ "Account": temp }, function(err, company){
+    if(err){
+      console.log(err);
+    } else {
+      
+      res.render('company', {
+        name:req.user.name,
+        company: company
+      });
+    }
+  });
+});
+
 // add route
 router.get('/add', ensureAuthenticated, function(req, res){
   res.render('add_company', {
@@ -15,9 +30,9 @@ router.get('/add', ensureAuthenticated, function(req, res){
 
 // add submit POST route
 router.post('/add', function(req, res){
-  req.checkBody('title','Title is required').notEmpty();
-  //req.checkBody('author','Author is required').notEmpty();
-  req.checkBody('body','Body is required').notEmpty();
+  //req.checkBody('title','Title is required').notEmpty();
+  //req.checkBody('Account','Account is required').notEmpty();
+  //req.checkBody('body','Body is required').notEmpty();
 
   // get errors
   let errors = req.validationErrors();
@@ -29,9 +44,24 @@ router.post('/add', function(req, res){
     });
   } else {
     let company = new Company();
-    company.title = req.body.title;
-    company.author = req.user._id;
-    company.body = req.body.body;
+    //company.title = req.body.title;
+    company.Account = req.user._id;
+    //company.body = req.body.body;
+
+    company.CompanyCode = req.body.CompanyCode;
+    company.CompanyGroup = req.body.CompanyGroup;
+    company.TaxID = req.body.TaxID;
+    company.NameThai = req.body.NameThai;
+    company.NameEnglish = req.body.NameEnglish;
+    company.BusinessType = req.body.BusinessType;
+    company.Address = req.body.Address;
+    company.Building = req.body.Building;
+    company.Soi = req.body.Soi;
+    company.Street = req.body.Street;
+    company.Tumbol = req.body.Tumbol;
+    company.District = req.body.District;
+    company.Province = req.body.Province;
+    company.ZipCode = req.body.ZipCode;
 
     company.save(function(err){
       if(err){
@@ -39,7 +69,7 @@ router.post('/add', function(req, res){
         return;
       } else {
         req.flash('success','Company Added');
-        res.redirect('/');
+        res.redirect('/companys');
       }
     });
   }
@@ -48,7 +78,7 @@ router.post('/add', function(req, res){
 // load edit form
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
     Company.findById(req.params.id, function(err, company){
-    if(company.author != req.user._id){
+    if(company.Account != req.user._id){
       req.flash('danger', 'Not Authorized');
       res.redirect('/');
     }
@@ -63,7 +93,7 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res){
 router.post('/edit/:id', function(req, res){
   let company = {};
   company.title = req.body.title;
-  company.author = req.body.author;
+  company.Account = req.body.Account;
   company.body = req.body.body;
 
   let query = {_id:req.params.id}
@@ -88,7 +118,7 @@ router.delete('/:id', function(req, res){
   let query = {_id:req.params.id}
 
   Company.findById(req.params.id, function(err, company){
-    if(company.author != req.user._id){
+    if(company.Account != req.user._id){
       res.status(500).send();
     } else {
         Company.remove(query, function(err){
@@ -104,10 +134,10 @@ router.delete('/:id', function(req, res){
 // get single company
 router.get('/:id', function(req, res){
     Company.findById(req.params.id, function(err, company){
-    User.findById(company.author, function(err, user){
+    User.findById(company.Account, function(err, user){
       res.render('company', {
         company:company,
-        author: user.name
+        Account: user.name
       });
     });
   });

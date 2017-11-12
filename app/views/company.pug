@@ -1,11 +1,27 @@
 extends layout
-
 block content
-  h1= company.title
-  h5 Written by #{author}
-  p= company.body
-  hr
+  h2 #{title}
+  
+  - for(var x=0;x<company.length;x++)
+    p Company Code: #{company[x].CompanyCode}
+    p Company Group: #{company[x].CompanyGroup}
+    p Tax ID: #{company[x].TaxID}
+    p Name Thai: #{company[x].NameThai}
+    p Name English: #{company[x].NameEnglish}
+    p Business Type: #{company[x].BusinessType}
+    p Address: #{company[x].Address}
+    p Building: #{company[x].Building}
+    p Soi: #{company[x].Soi}
+    p Street: #{company[x].Street}
+    p Tumbol: #{company[x].Tumbol}
+    p District: #{company[x].District}
+    p Province: #{company[x].Province}
+    p Zip Code: #{company[x].ZipCode}
+    br
+    hr
+    br
   if user
+  //
     if user.id ==company.author
         a.btn.btn-default(href='/companys/edit/'+company._id) Edit 
         a.btn.btn-danger.delete-company(href='#',data-id=company._id) Delete

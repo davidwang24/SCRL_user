@@ -4,10 +4,47 @@ block content
     h1 #{title}
     form(method='POST', action='/companys/add')
         #form-group
-            label Title:
-            input.form-control(name='title', type='text')
+            label Company Code:
+            input.form-control(name='CompanyCode', type='text')
         #form-group
-            label Body:
-            textarea.form-control(name='body')
+            label Company Group:
+            input.form-control(name='CompanyGroup', type='text')
+        #form-group
+            label TaxID:
+            input.form-control(name='TaxID', type='text')
+        #form-group
+            label Name Thai:
+            input.form-control(name='NameThai', type='text')
+        #form-group
+            label Name English:
+            input.form-control(name='NameEnglish', type='text')
+        #form-group
+            label Business Type:
+            input.form-control(name='BusinessType', type='text')
+        #form-group
+            label Address:
+            input.form-control(name='Address', type='text')
+        #form-group
+            label Building:
+            input.form-control(name='Building', type='text')
+        #form-group
+            label Soi:
+            input.form-control(name='Soi', type='text')
+        #form-group
+            label Street:
+            input.form-control(name='Street', type='text')
+        #form-group
+            label Tumbol:
+            input.form-control(name='Tumbol', type='text')
+        #form-group
+            label District:
+            input.form-control(name='District', type='text')
+        #form-group
+            label Province:
+            input.form-control(name='Province', type='text')
+        #form-group
+            label Zip Code:
+            input.form-control(name='ZipCode', type='text')
         br
         input.btn.btn-primary(type='submit',value='Submit')
+        a.btn.btn-danger(href='../', role='button') Cancel
