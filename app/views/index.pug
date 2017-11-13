@@ -1,3 +1,8 @@
 extends layout
 block content
-    h2 Main program
+    if user
+        h2 Hello, #{user.name}
+    else
+        h2 Main program
+    br
+    br

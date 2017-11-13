@@ -30,9 +30,21 @@ router.get('/add', ensureAuthenticated, function(req, res){
 
 // add submit POST route
 router.post('/add', function(req, res){
-  //req.checkBody('title','Title is required').notEmpty();
-  //req.checkBody('Account','Account is required').notEmpty();
-  //req.checkBody('body','Body is required').notEmpty();
+  req.checkBody('Account','Account is required').notEmpty();
+  req.checkBody('CompanyCode','CompanyCode is required').notEmpty();
+  req.checkBody('CompanyGroup','CompanyGroup is required').notEmpty();
+  req.checkBody('TaxID','TaxID is required').notEmpty();
+  req.checkBody('NameThai','NameThai is required').notEmpty();
+  req.checkBody('NameEnglish','NameEnglish is required').notEmpty();
+  req.checkBody('BusinessType','BusinessType is required').notEmpty();
+  req.checkBody('Address','Address is required').notEmpty();
+  req.checkBody('Building','Building is required').notEmpty();
+  req.checkBody('Soi','Soi is required').notEmpty();
+  req.checkBody('Street','Street is required').notEmpty();
+  req.checkBody('Tumbol','Tumbol is required').notEmpty();
+  req.checkBody('District','District is required').notEmpty();
+  req.checkBody('Province','Province is required').notEmpty();
+  req.checkBody('ZipCode','ZipCode is required').notEmpty();
 
   // get errors
   let errors = req.validationErrors();
@@ -44,10 +56,7 @@ router.post('/add', function(req, res){
     });
   } else {
     let company = new Company();
-    //company.title = req.body.title;
     company.Account = req.user._id;
-    //company.body = req.body.body;
-
     company.CompanyCode = req.body.CompanyCode;
     company.CompanyGroup = req.body.CompanyGroup;
     company.TaxID = req.body.TaxID;

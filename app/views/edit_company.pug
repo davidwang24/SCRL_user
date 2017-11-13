@@ -2,15 +2,49 @@ extends layout
 
 block content
   h1 #{title}
-  form(method='POST', action='/companys/edit/'+article._id)
+  form(method='POST', action='/companys/edit/'+company._id)
     #form-group
-      label Title:
-      input.form-control(name='title', type='text', value=article.title)
+      label Company Code:
+      input.form-control(name='CompanyCode', type='text' value=company.CompanyGroup)
     #form-group
-      label Author:
-      input.form-control(name='author', type='text', value=article.author)
+      label Company Group:
+      input.form-control(name='CompanyGroup', type='text' value=company.CompanyGroup)
     #form-group
-      label Body:
-      textarea.form-control(name='body')= article.body
+      label TaxID:
+      input.form-control(name='TaxID', type='text' value=company.TaxID)
+    #form-group
+      label Name Thai:
+      input.form-control(name='NameThai', type='text' value=company.NameThai)
+    #form-group
+      label Name English:
+      input.form-control(name='NameEnglish', type='text' value=company.NameEnglish)
+    #form-group
+      label Business Type:
+      input.form-control(name='BusinessType', type='text' value=company.BusinessType)
+    #form-group
+      label Address:
+      input.form-control(name='Address', type='text' value=company.Address)
+    #form-group
+      label Building:
+      input.form-control(name='Building', type='text' value=company.Building)
+    #form-group
+      label Soi:
+      input.form-control(name='Soi', type='text' value=company.Soi)
+    #form-group
+      label Street:
+      input.form-control(name='Street', type='text' value=company.Street)
+    #form-group
+      label Tumbol:
+      input.form-control(name='Tumbol', type='text' value=company.Tumbol)
+    #form-group
+      label District:
+      input.form-control(name='District', type='text' value=company.District)
+    #form-group
+      label Province:
+      input.form-control(name='Province', type='text' value=company.Province)
+    #form-group
+      label Zip Code:
+      input.form-control(name='ZipCode', type='text' value=company.ZipCode)
     br
     input.btn.btn-primary(type='submit',value='Submit')
+    a.btn.btn-secondary(href='../', role='button') Cancel
