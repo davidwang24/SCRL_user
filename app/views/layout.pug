@@ -24,10 +24,18 @@ html(lang="eng")
                         li.nav-item.dropdown
                             a#dropdown01.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Company
                             .dropdown-menu(aria-labelledby='dropdown01')
-                                a.dropdown-item(href='/companys') Information
-                                a.dropdown-item(href='/companys/add') Add Company
-                        li.nav-item
-                            //a.nav-link(href='/companys/add') Add Company
+                                if(user.stage>=1)
+                                    a.dropdown-item(href='/companys') Information
+                                if(user.stage==0)
+                                    a.dropdown-item(href='/companys/add') Add Company
+                        if(user.stage>=1)        
+                            li.nav-item.dropdown
+                                a#dropdown02.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Invoice
+                                .dropdown-menu(aria-labelledby='dropdown02')
+                                    if(user.stage>=2)
+                                        a.dropdown-item(href='/invoices') Information
+                                    if(user.stage==1)
+                                        a.dropdown-item(href='/invoices/add') Add Invoice
                 ul.nav.navbar-nav.navbar-right
                     if user
                         li.nav-item

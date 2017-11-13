@@ -1,21 +1,21 @@
 const express = require('express');
 const router = express.Router();
 
-// company model
-let Company = require('../models/company');
+// invoice model
+let Invoice = require('../models/invoice');
 // user model
 let User = require('../models/user');
 
 router.get('/', function(req, res){
   let temp = req.user._id;
-  Company.find({ "Account": temp }, function(err, company){
+  Invoice.find({ "Account": temp }, function(err, invoice){
     if(err){
       console.log(err);
     } else {
       
-      res.render('company', {
+      res.render('invoice', {
         name:req.user.name,
-        company: company
+        invoice: invoice
       });
     }
   });
@@ -23,8 +23,8 @@ router.get('/', function(req, res){
 
 // add route
 router.get('/add', ensureAuthenticated, function(req, res){
-  res.render('add_company', {
-    title:'Add Company'
+  res.render('add_invoice', {
+    title:'Add Invoice'
   });
 });
 
@@ -49,8 +49,8 @@ router.post('/add', function(req, res){
   let errors = req.validationErrors();
 
   if(errors){
-    res.render('add_company', {
-      title:'Add Company',
+    res.render('add_invoice', {
+      title:'Add Invoice',
       errors:errors
     });
   } else {
@@ -65,30 +65,30 @@ router.post('/add', function(req, res){
       }
     });
 
-    let company = new Company();
-    company.Account = req.user._id;
-    company.CompanyCode = req.body.CompanyCode;
-    company.CompanyGroup = req.body.CompanyGroup;
-    company.TaxID = req.body.TaxID;
-    company.NameThai = req.body.NameThai;
-    company.NameEnglish = req.body.NameEnglish;
-    company.BusinessType = req.body.BusinessType;
-    company.Address = req.body.Address;
-    company.Building = req.body.Building;
-    company.Soi = req.body.Soi;
-    company.Street = req.body.Street;
-    company.Tumbol = req.body.Tumbol;
-    company.District = req.body.District;
-    company.Province = req.body.Province;
-    company.ZipCode = req.body.ZipCode;
+    let invoice = new Invoice();
+    invoice.Account = req.user._id;
+    invoice.CompanyCode = req.body.CompanyCode;
+    invoice.CompanyGroup = req.body.CompanyGroup;
+    invoice.TaxID = req.body.TaxID;
+    invoice.NameThai = req.body.NameThai;
+    invoice.NameEnglish = req.body.NameEnglish;
+    invoice.BusinessType = req.body.BusinessType;
+    invoice.Address = req.body.Address;
+    invoice.Building = req.body.Building;
+    invoice.Soi = req.body.Soi;
+    invoice.Street = req.body.Street;
+    invoice.Tumbol = req.body.Tumbol;
+    invoice.District = req.body.District;
+    invoice.Province = req.body.Province;
+    invoice.ZipCode = req.body.ZipCode;
 
-    company.save(function(err){
+    invoice.save(function(err){
       if(err){
         console.log(err);
         return;
       } else {
-        req.flash('success','Company Added');
-        res.redirect('/companys');
+        req.flash('success','Invoice Added');
+        res.redirect('/invoices');
       }
     });
   }
@@ -96,39 +96,39 @@ router.post('/add', function(req, res){
 
 // load edit form
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
-    Company.findById(req.params.id, function(err, company){
-    if(company.Account != req.user._id){
+  Invoice.findById(req.params.id, function(err, invoice){
+    if(invoice.Account != req.user._id){
       req.flash('danger', 'Not Authorized');
       res.redirect('/');
     }
-    res.render('edit_company', {
-      title:'Edit Company',
-      company:company
+    res.render('edit_invoice', {
+      title:'Edit Invoice',
+      invoice:invoice
     });
   });
 });
 
 // update submit POST route
 router.post('/edit/:id', function(req, res){
-  let company = {};
-  company.title = req.body.title;
-  company.Account = req.body.Account;
-  company.body = req.body.body;
+  let invoice = {};
+  invoice.title = req.body.title;
+  invoice.Account = req.body.Account;
+  invoice.body = req.body.body;
 
   let query = {_id:req.params.id}
 
-  Company.update(query, company, function(err){
+  Invoice.update(query, invoice, function(err){
     if(err){
       console.log(err);
       return;
     } else {
-      req.flash('success', 'Company Updated');
+      req.flash('success', 'Invoice Updated');
       res.redirect('/');
     }
   });
 });
 
-// delete company
+// delete invoice
 router.delete('/:id', function(req, res){
   if(!req.user._id){
     res.status(500).send();
@@ -136,11 +136,11 @@ router.delete('/:id', function(req, res){
 
   let query = {_id:req.params.id}
 
-  Company.findById(req.params.id, function(err, company){
-    if(company.Account != req.user._id){
+  Invoice.findById(req.params.id, function(err, invoice){
+    if(invoice.Account != req.user._id){
       res.status(500).send();
     } else {
-        Company.remove(query, function(err){
+      Invoice.remove(query, function(err){
         if(err){
           console.log(err);
         }
@@ -150,12 +150,12 @@ router.delete('/:id', function(req, res){
   });
 });
 
-// get single company
+// get single invoice
 router.get('/:id', function(req, res){
-    Company.findById(req.params.id, function(err, company){
-    User.findById(company.Account, function(err, user){
-      res.render('company', {
-        company:company,
+  Invoice.findById(req.params.id, function(err, invoice){
+    User.findById(invoice.Account, function(err, user){
+      res.render('invoice', {
+        invoice:invoice,
         Account: user.name
       });
     });

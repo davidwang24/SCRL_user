@@ -36,6 +36,7 @@ router.post('/register', function(req, res){
         });
         } else {
         let newUser = new User({
+            stage:0,
             name:name,
             email:email,
             username:username,

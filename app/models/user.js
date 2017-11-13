@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 // User Schema
 const UserSchema = mongoose.Schema({
+  stage:{
+    type: Number,
+    required: true
+  },
   name:{
     type: String,
     required: true

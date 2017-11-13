@@ -78,8 +78,9 @@ app.get('/', function (req, res) {
 });
 
 // router files
-app.use('/companys', require('./routers/companys'));
 app.use('/users', require('./routers/users'));
+app.use('/companys', require('./routers/companys'));
+app.use('/invoices', require('./routers/invoices'));
 
 // Start Server
 app.listen(3000, function(){
