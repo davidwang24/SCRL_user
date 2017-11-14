@@ -15,7 +15,6 @@ router.get('/', function(req, res){
       console.log(err);
     } else {
       res.render('invoice', {
-        name:req.user.name,
         invoice: invoice
       });
     }
@@ -124,18 +123,6 @@ router.delete('/:id', function(req, res){
       });
 });
 
-// get single invoice
-router.get('/:id', function(req, res){
-  Invoice.findById(req.params.id, function(err, invoice){
-    User.findById(invoice.Account, function(err, user){
-      res.render('invoice', {
-        invoice:invoice,
-        Account: user.name
-      });
-    });
-  });
-});
-
 // access control
 function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){
@@ -145,5 +132,35 @@ function ensureAuthenticated(req, res, next){
     res.redirect('/users/login');
   }
 }
+
+router.get('/approve', function(req, res){
+  let temp = req.user._id;
+  Invoice.find({ "AccountPayee": temp }, function(err, invoice){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('approve', {
+        invoice: invoice
+      });
+    }
+  });
+});
+
+// approve invoice
+router.get('/approve/:id', function(req, res){
+  let query = {_id:req.params.id}
+Invoice.findByIdAndUpdate(query, {
+  $set:{
+    Stage:1,
+    Authorizer:req.user.name
+  }
+    }, function(err, invoice){
+      if(err){
+        console.log(err);
+        return;
+      }
+      res.send('Success');
+    });
+});
 
 module.exports = router;

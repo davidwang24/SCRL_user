@@ -17,6 +17,24 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+    $('.approve-invoice').on('click', function(e){
+        $target = $(e.target);
+        const id = $target.attr('data-id');
+        $.ajax({
+            type:'GET',
+            url: '/invoices/approve/'+id,
+            success: function(response){
+                alert('Approve Invoice');
+                window.location.href='/invoices/approve';
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    });
+});
+
+$(document).ready(function(){
     $('input[type="radio"]').click(function(){
         var inputValue = $(this).attr("value");
         var targetBox = $("." + inputValue);

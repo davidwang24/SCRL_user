@@ -13,7 +13,6 @@ router.get('/', function(req, res){
       console.log(err);
     } else {
       res.render('company', {
-        name:req.user.name,
         company: company
       });
     }
@@ -159,18 +158,6 @@ router.delete('/:id', function(req, res){
         res.send('Success');
       });
     }
-  });
-});
-
-// get single company
-router.get('/:id', function(req, res){
-    Company.findById(req.params.id, function(err, company){
-    User.findById(company.Account, function(err, user){
-      res.render('company', {
-        company:company,
-        Account: user.name
-      });
-    });
   });
 });
 
