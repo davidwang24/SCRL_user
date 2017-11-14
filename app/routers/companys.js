@@ -12,7 +12,6 @@ router.get('/', function(req, res){
     if(err){
       console.log(err);
     } else {
-      
       res.render('company', {
         name:req.user.name,
         company: company
@@ -30,12 +29,12 @@ router.get('/add', ensureAuthenticated, function(req, res){
 
 // add submit POST route
 router.post('/add', function(req, res){
-  req.checkBody('CompanyCode','CompanyCode is required').notEmpty();
-  req.checkBody('CompanyGroup','CompanyGroup is required').notEmpty();
-  req.checkBody('TaxID','TaxID is required').notEmpty();
-  req.checkBody('NameThai','NameThai is required').notEmpty();
-  req.checkBody('NameEnglish','NameEnglish is required').notEmpty();
-  req.checkBody('BusinessType','BusinessType is required').notEmpty();
+  req.checkBody('CompanyCode','Company Code is required').notEmpty();
+  req.checkBody('CompanyGroup','Company Group is required').notEmpty();
+  req.checkBody('TaxID','Tax ID is required').notEmpty();
+  req.checkBody('NameThai','Name Thai is required').notEmpty();
+  req.checkBody('NameEnglish','Name English is required').notEmpty();
+  req.checkBody('BusinessType','Business Type is required').notEmpty();
   req.checkBody('Address','Address is required').notEmpty();
   req.checkBody('Building','Building is required').notEmpty();
   req.checkBody('Soi','Soi is required').notEmpty();
@@ -43,8 +42,8 @@ router.post('/add', function(req, res){
   req.checkBody('Tumbol','Tumbol is required').notEmpty();
   req.checkBody('District','District is required').notEmpty();
   req.checkBody('Province','Province is required').notEmpty();
-  req.checkBody('ZipCode','ZipCode is required').notEmpty();
-
+  req.checkBody('ZipCode','Zip Code is required').notEmpty();
+  
   // get errors
   let errors = req.validationErrors();
 
@@ -111,9 +110,22 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res){
 // update submit POST route
 router.post('/edit/:id', function(req, res){
   let company = {};
-  company.title = req.body.title;
-  company.Account = req.body.Account;
-  company.body = req.body.body;
+  company.Account = req.user._id;
+  company.CompanyCode = req.body.CompanyCode;
+  company.CompanyGroup = req.body.CompanyGroup;
+  company.TaxID = req.body.TaxID;
+  company.NameThai = req.body.NameThai;
+  company.NameEnglish = req.body.NameEnglish;
+  company.BusinessType = req.body.BusinessType;
+  company.Address = req.body.Address;
+  company.Building = req.body.Building;
+  company.Soi = req.body.Soi;
+  company.Street = req.body.Street;
+  company.Tumbol = req.body.Tumbol;
+  company.District = req.body.District;
+  company.Province = req.body.Province;
+  company.ZipCode = req.body.ZipCode;
+  company.AccountNumber = req.body.AccountNumber;
 
   let query = {_id:req.params.id}
 
@@ -123,7 +135,7 @@ router.post('/edit/:id', function(req, res){
       return;
     } else {
       req.flash('success', 'Company Updated');
-      res.redirect('/');
+      res.redirect('/companys');
     }
   });
 });

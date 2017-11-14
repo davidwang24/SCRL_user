@@ -34,7 +34,7 @@ html(lang="eng")
                                 .dropdown-menu(aria-labelledby='dropdown02')
                                     if(user.stage>=2)
                                         a.dropdown-item(href='/invoices') Information
-                                    if(user.stage==1)
+                                    if(user.stage>=1)
                                         a.dropdown-item(href='/invoices/add') Add Invoice
                 ul.nav.navbar-nav.navbar-right
                     if user
@@ -71,4 +71,4 @@ html(lang="eng")
         script(src='/js/bootstrap.min.js')
         script(src='/js/main.js')
         script(src='http://getbootstrap.com/assets/js/vendor/popper.min.js')
-        script(src='http://getbootstrap.com/dist/js/bootstrap.min.js')  
+        script(src='http://getbootstrap.com/dist/js/bootstrap.min.js')

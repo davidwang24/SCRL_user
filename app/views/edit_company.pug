@@ -3,9 +3,10 @@ extends layout
 block content
   h1 #{title}
   form(method='POST', action='/companys/edit/'+company._id)
+    h3 Company Information
     #form-group
       label Company Code:
-      input.form-control(name='CompanyCode', type='text' value=company.CompanyGroup)
+      input.form-control(name='CompanyCode', type='text' value=company.CompanyCode)
     #form-group
       label Company Group:
       input.form-control(name='CompanyGroup', type='text' value=company.CompanyGroup)
@@ -21,6 +22,8 @@ block content
     #form-group
       label Business Type:
       input.form-control(name='BusinessType', type='text' value=company.BusinessType)
+    br
+    h3 Company Location
     #form-group
       label Address:
       input.form-control(name='Address', type='text' value=company.Address)
@@ -45,6 +48,11 @@ block content
     #form-group
       label Zip Code:
       input.form-control(name='ZipCode', type='text' value=company.ZipCode)
+    br
+    h3 Accuont
+    #form-group
+      label Account Number:
+      input.form-control(name='AccountNumber', type='text' value=company.AccountNumber)
     br
     input.btn.btn-primary(type='submit',value='Submit')
     a.btn.btn-secondary(href='../', role='button') Cancel

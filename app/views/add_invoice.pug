@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    h1 #{title}
+    form(method='POST', action='/invoices/add')
+        #form-group
+            label(for='Select1') Payee Company:
+            select#Select1.form-control(name='PayeeCompany')
+                - for(var x=0;x<company.length;x++)
+                    option #{company[x].CompanyCode}
+            label Voucher No:
+            input.form-control(name='VoucherNo', type='text')
+            label No of Transactions:
+            input.form-control(name='NoofTransactions', type='text')
+            label Total Amount:
+            input.form-control(name='TotalAmount', type='text')
+            p Payment Method:
+                label
+                    input(type='radio', name='Radio', value='Cash')
+                    |  by Cash
+                label
+                    input(type='radio', name='Radio', value='Finance')
+                    |  by Finance
+            .Cash.box
+                label Payer Account Number:
+                input.form-control(name='PayerAccountNumber', type='text')
+            .Finance.box
+                label Loan Term (Days):
+                input.form-control(name='LoanTerm', type='text')
+        br
+        input.btn.btn-primary(type='submit',value='Submit')
+        a.btn.btn-danger(href='../', role='button') Cancel

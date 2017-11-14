@@ -3,6 +3,7 @@ extends layout
 block content
     h1 #{title}
     form(method='POST', action='/companys/add')
+        h3 Company Information
         #form-group
             label Company Code:
             input.form-control(name='CompanyCode', type='text')
@@ -21,6 +22,8 @@ block content
         #form-group
             label Business Type:
             input.form-control(name='BusinessType', type='text')
+        br
+        h3 Company Location
         #form-group
             label Address:
             input.form-control(name='Address', type='text')
