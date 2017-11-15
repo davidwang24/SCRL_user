@@ -1,25 +1,19 @@
 extends layout
-
 block content
-  h1 #{title}
+  h2 #{title}
   form(method='POST', action='/companys/edit/'+company._id)
     h3 Company Information
     #form-group
       label Company Code:
       input.form-control(name='CompanyCode', type='text' value=company.CompanyCode)
-    #form-group
       label Company Group:
       input.form-control(name='CompanyGroup', type='text' value=company.CompanyGroup)
-    #form-group
       label TaxID:
       input.form-control(name='TaxID', type='text' value=company.TaxID)
-    #form-group
       label Name Thai:
       input.form-control(name='NameThai', type='text' value=company.NameThai)
-    #form-group
       label Name English:
       input.form-control(name='NameEnglish', type='text' value=company.NameEnglish)
-    #form-group
       label Business Type:
       input.form-control(name='BusinessType', type='text' value=company.BusinessType)
     br
@@ -27,32 +21,25 @@ block content
     #form-group
       label Address:
       input.form-control(name='Address', type='text' value=company.Address)
-    #form-group
       label Building:
       input.form-control(name='Building', type='text' value=company.Building)
-    #form-group
       label Soi:
       input.form-control(name='Soi', type='text' value=company.Soi)
-    #form-group
       label Street:
       input.form-control(name='Street', type='text' value=company.Street)
-    #form-group
       label Tumbol:
       input.form-control(name='Tumbol', type='text' value=company.Tumbol)
-    #form-group
       label District:
       input.form-control(name='District', type='text' value=company.District)
-    #form-group
       label Province:
       input.form-control(name='Province', type='text' value=company.Province)
-    #form-group
       label Zip Code:
       input.form-control(name='ZipCode', type='text' value=company.ZipCode)
     br
-    h3 Accuont
+    h3 Upload Company Document
     #form-group
-      label Account Number:
-      input.form-control(name='AccountNumber', type='text' value=company.AccountNumber)
+      label(for='file') Example file input
+      input#file.form-control-file(type='file' name='CompanyDocument' value=company.CompanyDocument)
     br
     input.btn.btn-primary(type='submit',value='Submit')
     a.btn.btn-secondary(href='../', role='button') Cancel

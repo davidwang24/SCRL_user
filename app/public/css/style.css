@@ -15,3 +15,12 @@
     background-color: #dff0d8;
     border-color: #d6e9c6;
   }
+table.table-bordered{
+    border:1px solid #101082;
+  }
+  table.table-bordered > thead > tr > th{
+    border:1px solid #101082;
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid #101082;
+}

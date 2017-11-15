@@ -28,7 +28,12 @@ block content
         .col Province: #{company[x].Province}
         .col Zip Code: #{company[x].ZipCode}
     br
-    a.btn.btn-primary(href='/companys/edit/'+company[x]._id) Edit 
-    //a.btn.btn-danger.delete-company(href='#',data-id=company._id) Delete
+    h3 Upload Company Document
+    .container
+      .row
+        .col Company Document: #{company[x].CompanyDocument}
+    br
+    if(user.stage==1)
+      a.btn.btn-primary(href='/companys/edit/'+company[x]._id) Edit 
     br
     hr

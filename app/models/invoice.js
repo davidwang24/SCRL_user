@@ -4,7 +4,7 @@ let mongoose = require('mongoose');
 let invoiceSchema = mongoose.Schema({
         //system
         Stage:{
-            type: String,
+            type: Number,
             require: true
         },
         AccountPayer:{
@@ -44,11 +44,11 @@ let invoiceSchema = mongoose.Schema({
             require: true
         },
         NoofTransactions:{
-            type: Number,
+            type: String,
             require: true
         },
         TotalAmount:{
-            type: Number,
+            type: String,
             require: true
         },
         PaymentMethod:{

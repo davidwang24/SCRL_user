@@ -2,7 +2,7 @@ extends layout
 block content
   h2 Invoice Detail
   br
-  table.table
+  table.table.table-bordered
     thead.thead(style='background-color: #101082; color: white;')
       tr
         th(scope='col') #
@@ -11,12 +11,9 @@ block content
         th(scope='col') Total Amount
         th(scope='col') Confirm By
         th(scope='col') Confirm Date
-        th(scope='col') Effective Date
         th(scope='col') Payment Method
         th(scope='col') Payer Account Number
         th(scope='col') Loan Term
-        th(scope='col') Maturity Date
-        th(scope='col') Authorizer
         th(scope='col') 
 
     - for(var x=0;x<invoice.length;x++)
@@ -27,11 +24,8 @@ block content
         td #{invoice[x].TotalAmount}
         td #{invoice[x].ConfirmBy}
         td #{invoice[x].ConfirmDate}
-        td #{invoice[x].EffectiveDate}
         td #{invoice[x].PaymentMethod}
         td #{invoice[x].PayerAccountNumber}
         td #{invoice[x].LoanTerm}
-        td #{invoice[x].MaturityDate}
-        td #{invoice[x].Authorizer}
         td
           a.btn.btn-danger.delete-invoice(href='#',data-id=invoice[x]._id) Delete

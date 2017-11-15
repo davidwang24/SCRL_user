@@ -1,25 +1,19 @@
 extends layout
-
 block content
-    h1 #{title}
+    h2 #{title}
     form(method='POST', action='/companys/add')
         h3 Company Information
         #form-group
             label Company Code:
             input.form-control(name='CompanyCode', type='text')
-        #form-group
             label Company Group:
             input.form-control(name='CompanyGroup', type='text')
-        #form-group
             label TaxID:
             input.form-control(name='TaxID', type='text')
-        #form-group
             label Name Thai:
             input.form-control(name='NameThai', type='text')
-        #form-group
             label Name English:
             input.form-control(name='NameEnglish', type='text')
-        #form-group
             label Business Type:
             input.form-control(name='BusinessType', type='text')
         br
@@ -27,27 +21,25 @@ block content
         #form-group
             label Address:
             input.form-control(name='Address', type='text')
-        #form-group
             label Building:
             input.form-control(name='Building', type='text')
-        #form-group
             label Soi:
             input.form-control(name='Soi', type='text')
-        #form-group
             label Street:
             input.form-control(name='Street', type='text')
-        #form-group
             label Tumbol:
             input.form-control(name='Tumbol', type='text')
-        #form-group
             label District:
             input.form-control(name='District', type='text')
-        #form-group
             label Province:
             input.form-control(name='Province', type='text')
-        #form-group
             label Zip Code:
             input.form-control(name='ZipCode', type='text')
+        br
+        h3 Upload Company Document
+        #form-group
+            label(for='file') Example file input
+            input#file.form-control-file(type='file' name='CompanyDocument')
         br
         input.btn.btn-primary(type='submit',value='Submit')
         a.btn.btn-danger(href='../', role='button') Cancel

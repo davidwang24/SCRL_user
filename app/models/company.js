@@ -65,6 +65,10 @@ let companySchema = mongoose.Schema({
         ZipCode:{
             type: String,
             require: true
+        },
+        CompanyDocument:{
+            type: String,
+            require: true
         }
 });
 

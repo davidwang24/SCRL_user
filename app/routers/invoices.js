@@ -59,7 +59,7 @@ router.post('/add', function(req, res){
   } else {
     User.findByIdAndUpdate(req.user._id, {
       $set:{
-        stage:2
+        stage:3
       }
     }, function(err, user){
       if(err){
@@ -149,18 +149,32 @@ router.get('/approve', function(req, res){
 // approve invoice
 router.get('/approve/:id', function(req, res){
   let query = {_id:req.params.id}
-Invoice.findByIdAndUpdate(query, {
-  $set:{
-    Stage:1,
-    Authorizer:req.user.name
-  }
-    }, function(err, invoice){
-      if(err){
-        console.log(err);
-        return;
-      }
-      res.send('Success');
-    });
+  Invoice.findByIdAndUpdate(query, {
+    $set:{
+      Stage:1,
+      Authorizer:req.user.name
+    }
+      }, function(err, invoice){
+        if(err){
+          console.log(err);
+          return;
+        }
+        res.send('Success');
+      });
+});
+
+// status invoice
+router.get('/status', function(req, res){
+  Invoice.find({}, function(err, invoice){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('status', {
+        invoice: invoice,
+        id:req.user._id
+      });
+    }
+  });
 });
 
 module.exports = router;

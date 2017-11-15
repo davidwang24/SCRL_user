@@ -25,18 +25,17 @@ html(lang="eng")
                             a#dropdown01.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Company
                             .dropdown-menu(aria-labelledby='dropdown01')
                                 if(user.stage>=1)
-                                    a.dropdown-item(href='/companys') Information
+                                    a.dropdown-item(href='/companys') Company Profile
                                 if(user.stage==0)
                                     a.dropdown-item(href='/companys/add') Add Company
-                        if(user.stage>=1)        
+                        if(user.stage>=2)
                             li.nav-item.dropdown
                                 a#dropdown02.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Invoice
                                 .dropdown-menu(aria-labelledby='dropdown02')
-                                    if(user.stage>=2)
-                                        a.dropdown-item(href='/invoices') Information
-                                    if(user.stage>=1)
-                                        a.dropdown-item(href='/invoices/add') Add Invoice
-                                        a.dropdown-item(href='/invoices/approve') Approve Invoice
+                                    a.dropdown-item(href='/invoices/add') Add Invoice
+                                    a.dropdown-item(href='/invoices') Invoice Details
+                                    a.dropdown-item(href='/invoices/approve') Approve Invoice
+                                    a.dropdown-item(href='/invoices/status') Status Invoice
                 ul.nav.navbar-nav.navbar-right
                     if user
                         li.nav-item
@@ -48,15 +47,6 @@ html(lang="eng")
                             a.nav-link(href='/users/register') Register
                         li.nav-item
                             a.nav-link(href='/users/login') Login
-                //    
-                    li.nav-item
-                        a.nav-link(href='#') Disabled
-                    li.nav-item.dropdown
-                        a#dropdown01.nav-link.dropdown-toggle(href='http://example.com', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Dropdown
-                        .dropdown-menu(aria-labelledby='dropdown01')
-                            a.dropdown-item(href='#') Action
-                            a.dropdown-item(href='#') Another action
-                            a.dropdown-item(href='#') Something else here
         .container
             != messages('message', locals)
             if errors

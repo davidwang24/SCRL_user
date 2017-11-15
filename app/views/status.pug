@@ -1,6 +1,6 @@
 extends layout
 block content
-  h2 Approve Invoice Detail
+  h2 Status Invoice Detail
   br
   table.table.table-bordered
     thead.thead(style='background-color: #101082; color: white;')
@@ -11,13 +11,16 @@ block content
         th(scope='col') Total Amount
         th(scope='col') Confirm By
         th(scope='col') Confirm Date
+        th(scope='col') Effective Date
         th(scope='col') Payment Method
         th(scope='col') Payer Account Number
         th(scope='col') Loan Term
-        th(scope='col') 
+        th(scope='col') Maturity Date
+        th(scope='col') Authorizer
+        th(scope='col') Status
 
     - for(var x=0;x<invoice.length;x++)
-      - if(invoice[x].Stage==0)
+      if(invoice[x].AccountPayer==id||invoice[x].AccountPayee==id)
         tr
           td #{x+1}
           td #{invoice[x].VoucherNo}
@@ -25,8 +28,13 @@ block content
           td #{invoice[x].TotalAmount}
           td #{invoice[x].ConfirmBy}
           td #{invoice[x].ConfirmDate}
+          td #{invoice[x].EffectiveDate}
           td #{invoice[x].PaymentMethod}
           td #{invoice[x].PayerAccountNumber}
           td #{invoice[x].LoanTerm}
-          td
-            a.btn.btn-primary.approve-invoice(href='#',data-id=invoice[x]._id) Submit
+          td #{invoice[x].MaturityDate}
+          td #{invoice[x].Authorizer}
+            if(invoice[x].Stage==0)
+              td Not yet approved by Payee
+            if(invoice[x].Stage==1)
+              td Not yet approved by Bank

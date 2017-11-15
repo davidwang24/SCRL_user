@@ -2,6 +2,19 @@ extends layout
 block content
     if user
         h2 Hello, #{user.name}
+        br
+        if(user.stage==0)
+            p Add a company to get started.
+        if(user.stage==1)
+            p Please wait for the official to check the company information.
+        if(user.stage==2)
+            p You can manage your invoices.
+        if(user.message)
+            br
+            br
+            br
+            h4 From Offical:
+            h4 #{user.message}
     else
         h2 Main program
     br

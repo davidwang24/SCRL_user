@@ -42,7 +42,8 @@ router.post('/add', function(req, res){
   req.checkBody('District','District is required').notEmpty();
   req.checkBody('Province','Province is required').notEmpty();
   req.checkBody('ZipCode','Zip Code is required').notEmpty();
-  
+  req.checkBody('CompanyDocument','Company Document is required').notEmpty();
+
   // get errors
   let errors = req.validationErrors();
 
@@ -79,6 +80,7 @@ router.post('/add', function(req, res){
     company.District = req.body.District;
     company.Province = req.body.Province;
     company.ZipCode = req.body.ZipCode;
+    company.CompanyDocument = req.body.CompanyDocument;
 
     company.save(function(err){
       if(err){
@@ -124,7 +126,7 @@ router.post('/edit/:id', function(req, res){
   company.District = req.body.District;
   company.Province = req.body.Province;
   company.ZipCode = req.body.ZipCode;
-  company.AccountNumber = req.body.AccountNumber;
+  company.CompanyDocument = req.body.CompanyDocument;
 
   let query = {_id:req.params.id}
 
