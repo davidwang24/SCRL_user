@@ -29,7 +29,8 @@ router.get('/add', ensureAuthenticated, function(req, res){
     } else {
       res.render('add_invoice', {
         title:'Add Invoice',
-        company:company
+        company:company,
+        id:req.user._id
       });
     }
   });
@@ -40,6 +41,7 @@ router.post('/add', function(req, res){
   req.checkBody('VoucherNo','Voucher No is required').notEmpty();
   req.checkBody('NoofTransactions','No of Transactions is required').notEmpty();
   req.checkBody('TotalAmount','Total Amount is required').notEmpty();
+  req.checkBody('InvoiceDocument','Invoice Document is required').notEmpty();
   
   // get errors
   let errors = req.validationErrors();
@@ -52,6 +54,7 @@ router.post('/add', function(req, res){
         res.render('add_invoice', {
           title:'Add Invoice',
           company:company,
+          id:req.user._id,
           errors:errors
         });
       }
@@ -93,6 +96,7 @@ router.post('/add', function(req, res){
     invoice.PaymentMethod = req.body.Radio;
     invoice.PayerAccountNumber = req.body.PayerAccountNumber;
     invoice.LoanTerm = req.body.LoanTerm;
+    invoice.InvoiceDocument = req.body.InvoiceDocument;
     let temp = req.body.PayeeCompany;
     Company.find({ "CompanyCode": temp }, function(err, company){
       if(err){

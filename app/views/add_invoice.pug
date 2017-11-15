@@ -6,7 +6,8 @@ block content
             label(for='Select1') Payee Company:
             select#Select1.form-control(name='PayeeCompany')
                 - for(var x=0;x<company.length;x++)
-                    option #{company[x].CompanyCode}
+                    if(company[x].Account!=id)
+                        option #{company[x].CompanyCode}
             label Voucher No:
             input.form-control(name='VoucherNo', type='text')
             label No of Transactions:
@@ -26,6 +27,11 @@ block content
             .Finance.box
                 label Loan Term (Days):
                 input.form-control(name='LoanTerm', type='text')
+        br
+        h3 Upload Invoice Document
+        #form-group
+            label(for='file') file input
+            input#file.form-control-file(type='file' name='InvoiceDocument')
         br
         input.btn.btn-primary(type='submit',value='Submit')
         a.btn.btn-danger(href='../', role='button') Cancel
