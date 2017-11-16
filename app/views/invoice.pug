@@ -28,5 +28,6 @@ block content
         td #{invoice[x].PayerAccountNumber}
         td #{invoice[x].LoanTerm}
         td
-          center
-            a.btn.btn-danger.delete-invoice(href='#',data-id=invoice[x]._id) Delete
+          if(invoice[x].Stage<=2)
+            center
+              a.btn.btn-danger.delete-invoice(href='#',data-id=invoice[x]._id) Delete

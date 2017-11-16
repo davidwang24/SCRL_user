@@ -136,8 +136,18 @@ router.post('/edit/:id', function(req, res){
       console.log(err);
       return;
     } else {
-      req.flash('success', 'Company Updated');
-      res.redirect('/companys');
+      User.findByIdAndUpdate(req.user._id, {
+        $set:{
+          stage:1
+        }
+      }, function(err, user){
+        if(err){
+          console.log(err);
+          return;
+        }
+        req.flash('success', 'Company Updated');
+        res.redirect('/companys');
+      });
     }
   });
 });

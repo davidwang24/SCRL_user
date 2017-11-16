@@ -30,7 +30,7 @@ block content
     .row
       .col Company Document: #{company[x].CompanyDocument}
     br
-    if(user.stage==1)
-      a.btn.btn-primary(href='/companys/edit/'+company[x]._id) Edit 
+    a.btn.btn-primary(href='/companys/edit/'+company[x]._id) Edit
+    a.btn.btn-secondary(href='../', role='button') Back
     br
     hr
