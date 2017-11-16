@@ -2,36 +2,33 @@ extends layout
 block content
   - for(var x=0;x<company.length;x++)
     h3 Company Information
-    .container
-      .row
-        .col Company Code: #{company[x].CompanyCode}
-        .col Company Group: #{company[x].CompanyGroup}
-        .w-100
-        .col Tax ID: #{company[x].TaxID}
-        .col Name Thai: #{company[x].NameThai}
-        .w-100
-        .col Name English: #{company[x].NameEnglish}
-        .col Business Type: #{company[x].BusinessType}
+    .row
+      .col Company Code: #{company[x].CompanyCode}
+      .col Company Group: #{company[x].CompanyGroup}
+      .w-100
+      .col Tax ID: #{company[x].TaxID}
+      .col Name Thai: #{company[x].NameThai}
+      .w-100
+      .col Name English: #{company[x].NameEnglish}
+      .col Business Type: #{company[x].BusinessType}
     br
     h3 Company Location
-    .container
-      .row
-        .col Address: #{company[x].Address}
-        .col Building: #{company[x].Building}
-        .w-100
-        .col Soi: #{company[x].Soi}
-        .col Street: #{company[x].Street}
-        .w-100
-        .col Tumbol: #{company[x].Tumbol}
-        .col District: #{company[x].District}
-        .w-100
-        .col Province: #{company[x].Province}
-        .col Zip Code: #{company[x].ZipCode}
+    .row
+      .col Address: #{company[x].Address}
+      .col Building: #{company[x].Building}
+      .w-100
+      .col Soi: #{company[x].Soi}
+      .col Street: #{company[x].Street}
+      .w-100
+      .col Tumbol: #{company[x].Tumbol}
+      .col District: #{company[x].District}
+      .w-100
+      .col Province: #{company[x].Province}
+      .col Zip Code: #{company[x].ZipCode}
     br
     h3 Upload Company Document
-    .container
-      .row
-        .col Company Document: #{company[x].CompanyDocument}
+    .row
+      .col Company Document: #{company[x].CompanyDocument}
     br
     if(user.stage==1)
       a.btn.btn-primary(href='/companys/edit/'+company[x]._id) Edit 

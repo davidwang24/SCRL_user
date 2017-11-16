@@ -5,14 +5,6 @@ html(lang="eng")
         link(rel='stylesheet' href='/css/bootstrap.min.css')
         link(rel='stylesheet' href='/css/style.css')
         link(rel='icon' href='images/favicon.ico')
-        style.
-            body {
-            background-image: url("/images/BBL.jpg");
-            background-repeat: no-repeat;
-            background-position: right bottom;
-            background-attachment: fixed;
-            background-size: 15% 15%;
-            }
     body
         nav.navbar.navbar-expand-md.navbar-dark.fixed-top(style='background-color: #101082;')
             a.navbar-brand(href='/') SCF Solution
@@ -47,7 +39,7 @@ html(lang="eng")
                             a.nav-link(href='/users/register') Register
                         li.nav-item
                             a.nav-link(href='/users/login') Login
-        .container
+        .container-fluid
             != messages('message', locals)
             if errors
                 each error, i in errors

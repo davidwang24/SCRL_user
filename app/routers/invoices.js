@@ -60,16 +60,6 @@ router.post('/add', function(req, res){
       }
     });
   } else {
-    User.findByIdAndUpdate(req.user._id, {
-      $set:{
-        stage:3
-      }
-    }, function(err, user){
-      if(err){
-        console.log(err);
-        return;
-      }
-    });
     var today = new Date();
     //today.setDate(today.getDate() + 7);
     var dd = today.getDate();

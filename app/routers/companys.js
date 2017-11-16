@@ -66,6 +66,7 @@ router.post('/add', function(req, res){
 
     let company = new Company();
     company.Account = req.user._id;
+    company.ETHAccount = '';
     company.CompanyCode = req.body.CompanyCode;
     company.CompanyGroup = req.body.CompanyGroup;
     company.TaxID = req.body.TaxID;
