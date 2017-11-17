@@ -1,5 +1,7 @@
 extends layout
 block content
+  center
+    h2 Company Profile
   - for(var x=0;x<company.length;x++)
     h3 Company Information
     .row
@@ -30,7 +32,6 @@ block content
     .row
       .col Company Document: #{company[x].CompanyDocument}
     br
-    a.btn.btn-primary(href='/companys/edit/'+company[x]._id) Edit
-    a.btn.btn-secondary(href='../', role='button') Back
-    br
-    hr
+    center
+      a.btn.btn-primary(href='/companys/edit/'+company[x]._id) Edit
+      a.btn.btn-secondary(href='../', role='button') Back

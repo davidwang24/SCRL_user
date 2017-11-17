@@ -19,8 +19,10 @@ var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 mongoose.connect(config.database, { useMongoClient: true });
 mongoose.Promise = global.Promise;
 
-// bring in models
-var UserTB = require('./models/company');
+// invoice model
+let Invoice = require('./models/invoice');
+// company model
+let Company = require('./models/company');
 
 // load view engine
 app.set('view engine', 'pug');
@@ -73,8 +75,14 @@ app.get('*', function(req, res, next){
 });
 
 // home route
-app.get('/', function (req, res) {
-    res.render('index');
+app.get('/', function(req, res){
+  Invoice.find({}, function(err, invoice){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('index', { invoice: invoice });
+    }
+  });
 });
 
 // router files

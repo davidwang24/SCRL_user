@@ -23,14 +23,17 @@ body {
 table.table-bordered {
     border:1px solid #101082;
 }
-  table.table-bordered > thead > tr > th {
+table.table-bordered > thead > tr > th {
     border:1px solid #101082;
 }
 table.table-bordered > tbody > tr > td {
     border:1px solid #101082;
 }
 .message {
-  background-color: red;
-  color: white;
-  padding: 20px;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    width: 45%;
 }
+.message.info {background-color: #2196F3;}
+.message.warning {background-color: #ff9800;}

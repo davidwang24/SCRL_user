@@ -1,23 +1,35 @@
 extends layout
 block content
-    if user
-        h2 Hello, #{user.name}
+    center
+        if user
+            h2 Hello, #{user.name}
+            br
+            .message.info
+                if(user.stage==0)
+                    strong Info!
+                    |  Add a company to get started.
+                if(user.stage==1)
+                    strong Info!
+                    |  Please wait for the official to check the company information.
+                if(user.stage==2)
+                    strong Info!
+                    |  You can manage your invoices.
+            - var temp=0;
+            - for(var x=0;x<invoice.length;x++)
+                if(invoice[x].Stage==0)
+                    if(user._id==invoice[x].AccountPayee)
+                        br
+                        .message.warning
+                            strong Alert Message!
+                            |  Please check your invoice for verification.
+                            strong
+                                a(href='/invoices/approve') Click
+            if(user.message)
+                br
+                .message
+                    strong Message from offical!
+                    |  #{user.message}
+        else
+            h2 Welcome to the Supply Chain Finance Solution.
         br
-        if(user.stage==0)
-            p Add a company to get started.
-        if(user.stage==1)
-            p Please wait for the official to check the company information.
-        if(user.stage==2)
-            p You can manage your invoices.
-        if(user.message)
-            br
-            br
-            br
-            br
-            br
-            .message
-                h4 !!! Message from offical: #{user.message}
-    else
-        h2 Main program
-    br
-    br
+        br

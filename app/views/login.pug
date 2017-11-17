@@ -1,6 +1,7 @@
 extends layout
 block content
-    h2 Login
+    center
+        h2 Login
     form(method='POST', action='/users/login')
         #form-group
             label Username:
@@ -9,5 +10,6 @@ block content
             label Password:
             input.form-control(name='password',type='password')
         br
-        input.btn.btn-primary(type='submit',value='Submit')
-        a.btn.btn-secondary(href='../', role='button') Back
+        center
+            input.btn.btn-primary(type='submit',value='Submit')
+            a.btn.btn-secondary(href='../', role='button') Back

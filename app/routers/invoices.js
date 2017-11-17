@@ -14,8 +14,15 @@ router.get('/', function(req, res){
     if(err){
       console.log(err);
     } else {
-      res.render('invoice', {
-        invoice: invoice
+      Company.find({}, function(err, company){
+        if(err){
+          console.log(err);
+        } else {
+          res.render('invoice', {
+            invoice: invoice,
+            company:company
+          });
+        }
       });
     }
   });
@@ -28,7 +35,6 @@ router.get('/add', ensureAuthenticated, function(req, res){
       console.log(err);
     } else {
       res.render('add_invoice', {
-        title:'Add Invoice',
         company:company,
         id:req.user._id
       });

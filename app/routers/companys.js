@@ -49,7 +49,6 @@ router.post('/add', function(req, res){
 
   if(errors){
     res.render('add_company', {
-      title:'Add Company',
       errors:errors
     });
   } else {
@@ -103,7 +102,6 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res){
       res.redirect('/');
     }
     res.render('edit_company', {
-      title:'Edit Company',
       company:company
     });
   });

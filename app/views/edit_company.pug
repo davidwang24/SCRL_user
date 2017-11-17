@@ -1,6 +1,7 @@
 extends layout
 block content
-  h2 #{title}
+  center
+    h2 Edit Company
   form(method='POST', action='/companys/edit/'+company._id)
     h3 Company Information
     #form-group
@@ -39,7 +40,8 @@ block content
     h3 Upload Company Document
     #form-group
       label(for='file') Example file input
-      input#file.form-control-file(type='file' name='CompanyDocument' value=company.CompanyDocument)
+      input#file.form-control-file(type='file', name='CompanyDocument', value=company.CompanyDocument)
     br
-    input.btn.btn-primary(type='submit',value='Submit')
-    a.btn.btn-secondary(href='../', role='button') Cancel
+    center
+      input.btn.btn-primary(type='submit',value='Submit')
+      a.btn.btn-danger(href='../', role='button') Cancel

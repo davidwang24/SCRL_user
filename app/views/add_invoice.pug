@@ -1,9 +1,10 @@
 extends layout
 block content
-    h2 #{title}
+    center
+        h2 Add Invoice
     form(method='POST', action='/invoices/add')
         #form-group
-            label(for='Select1') Payee Company:
+            label(for='Select1') Payee Company Code:
             select#Select1.form-control(name='PayeeCompany')
                 - for(var x=0;x<company.length;x++)
                     if(company[x].Account!=id)
@@ -33,5 +34,6 @@ block content
             label(for='file') file input
             input#file.form-control-file(type='file' name='InvoiceDocument')
         br
-        input.btn.btn-primary(type='submit',value='Submit')
-        a.btn.btn-danger(href='../', role='button') Cancel
+        center
+            input.btn.btn-primary(type='submit',value='Submit')
+            a.btn.btn-danger(href='../', role='button') Cancel

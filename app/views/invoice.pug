@@ -1,11 +1,13 @@
 extends layout
 block content
-  h2 Invoice Detail
+  center
+    h2 Invoice Detail
   br
   table.table.table-bordered
     thead.thead(style='background-color: #101082; color: white;')
       tr
         th(scope='col') #
+        th(scope='col') Payee company
         th(scope='col') Voucher No
         th(scope='col') No of Transactions
         th(scope='col') Total Amount
@@ -19,6 +21,9 @@ block content
     - for(var x=0;x<invoice.length;x++)
       tr
         td #{x+1}
+        - for(var y=0;y<company.length;y++)
+          if(invoice[x].AccountPayee==company[y].Account)
+            td #{company[y].NameEnglish}
         td #{invoice[x].VoucherNo}
         td #{invoice[x].NoofTransactions}
         td #{invoice[x].TotalAmount}
