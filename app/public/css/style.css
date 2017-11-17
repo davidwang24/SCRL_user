@@ -1,10 +1,9 @@
 body {
     padding-top: 5rem;
-    background-image: url("/images/BBL.jpg");
+    background-image: url("/images/BBL.png");
     background-repeat: no-repeat;
     background-position: right bottom;
     background-attachment: fixed;
-    background-size: 15% 15%;
 }
 .starter-template {
     padding: 3rem 1.5rem;
