@@ -32,6 +32,10 @@ block content
     .row
       .col Company Document: #{company[x].CompanyDocument}
     br
+    h3 Ethereum Account
+    .row
+      .col Ethereum Account: #{company[x].ETHAccount}
+    br
     center
       a.btn.btn-primary(href='/companys/edit/'+company[x]._id) Edit
       a.btn.btn-secondary(href='../', role='button') Back

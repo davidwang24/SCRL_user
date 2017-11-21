@@ -65,7 +65,7 @@ router.post('/add', function(req, res){
 
     let company = new Company();
     company.Account = req.user._id;
-    company.ETHAccount = '';
+    company.ETHAccount = req.body.ETHAccount;
     company.CompanyCode = req.body.CompanyCode;
     company.CompanyGroup = req.body.CompanyGroup;
     company.TaxID = req.body.TaxID;
@@ -111,6 +111,7 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res){
 router.post('/edit/:id', function(req, res){
   let company = {};
   company.Account = req.user._id;
+  company.ETHAccount = req.body.ETHAccount;
   company.CompanyCode = req.body.CompanyCode;
   company.CompanyGroup = req.body.CompanyGroup;
   company.TaxID = req.body.TaxID;

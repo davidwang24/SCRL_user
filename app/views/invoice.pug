@@ -16,7 +16,7 @@ block content
         th(scope='col') Payment Method
         th(scope='col') Payer Account Number
         th(scope='col') Loan Term
-        th(scope='col') 
+        th(scope='col') Delete
 
     - for(var x=0;x<invoice.length;x++)
       tr
@@ -33,6 +33,6 @@ block content
         td #{invoice[x].PayerAccountNumber}
         td #{invoice[x].LoanTerm}
         td
-          if(invoice[x].Stage<=2)
+          if(invoice[x].Stage<=1)
             center
               a.btn.btn-danger.delete-invoice(href='#',data-id=invoice[x]._id) Delete

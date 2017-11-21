@@ -42,6 +42,11 @@ block content
       label(for='file') Example file input
       input#file.form-control-file(type='file', name='CompanyDocument', value=company.CompanyDocument)
     br
+    h3 Ethereum Account
+    #form-group
+      label Ethereum Account:
+      input.form-control(name='ETHAccount', type='text' value=company.ETHAccount)
+    br
     center
       input.btn.btn-primary(type='submit',value='Submit')
       a.btn.btn-danger(href='../', role='button') Cancel
