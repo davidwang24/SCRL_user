@@ -83,9 +83,6 @@ router.post('/add', function(req, res){
     invoice.AccountPayer = req.user._id;
     invoice.ConfirmBy = req.user.name;
     invoice.ConfirmDate = today;
-    //invoice.EffectiveDate = req.body.EffectiveDate;
-    //invoice.MaturityDate = req.body.MaturityDate;
-    //invoice.Authorizer = 'NULL';
     invoice.VoucherNo = req.body.VoucherNo;
     invoice.NoofTransactions = req.body.NoofTransactions;
     invoice.TotalAmount = req.body.TotalAmount;
