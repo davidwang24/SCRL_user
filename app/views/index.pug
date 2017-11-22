@@ -13,7 +13,7 @@ block content
                     |  Please wait for the official to check the company information.
                 if(user.stage==2)
                     strong Info!
-                    |  You can manage your invoices.
+                    |  You can manage your invoices and wallet.
             - var temp=0;
             - for(var x=0;x<invoice.length;x++)
                 if(invoice[x].Stage==0)
@@ -24,6 +24,14 @@ block content
                             |  Please check your invoice for verification.
                             strong
                                 a(href='/invoices/approve') Click
+                if(invoice[x].Stage==3)
+                    if(user._id==invoice[x].AccountPayer)
+                        br
+                        .message.warning
+                            strong Alert Message!
+                            |  Please check your wallet for payment to Bank.
+                            strong
+                                a(href='/wallets/transfer') Click
             if(user.message)
                 br
                 .message

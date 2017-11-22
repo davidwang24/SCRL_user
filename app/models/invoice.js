@@ -48,7 +48,7 @@ let invoiceSchema = mongoose.Schema({
             require: true
         },
         TotalAmount:{
-            type: String,
+            type: Number,
             require: true
         },
         PaymentMethod:{

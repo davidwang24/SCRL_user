@@ -41,3 +41,7 @@ block content
               td Not yet approved by Bank
             if(invoice[x].Stage==2)
               td Waiting funds early payment to the payee.
+            if(invoice[x].Stage==3)
+              td Waiting for the Payer to payment the Bank.
+            if(invoice[x].Stage==4)
+              td Complete invoice.

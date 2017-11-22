@@ -1,0 +1,53 @@
+extends layout
+block content
+    center
+        h2 Transfer Payment Invoice Token
+    br
+    table.table.table-bordered
+        thead.thead(style='background-color: #101082; color: white;')
+            tr
+                th(scope='col') #
+                th(scope='col') Voucher No
+                th(scope='col') No of Transactions
+                th(scope='col') Total Amount
+                th(scope='col') Confirm By
+                th(scope='col') Confirm Date
+                th(scope='col') Effective Date
+                th(scope='col') Payment Method
+                th(scope='col') Payer Account Number
+                th(scope='col') Loan Term
+                th(scope='col') Maturity Date
+                th(scope='col') Authorized by
+        - for(var x=0;x<invoice.length;x++)
+            if(invoice[x].Stage==3)
+                if(user._id==invoice[x].AccountPayer)
+                    tr
+                        td #{x+1}
+                        td #{invoice[x].VoucherNo}
+                        td #{invoice[x].NoofTransactions}
+                        td #{invoice[x].TotalAmount}
+                        td #{invoice[x].ConfirmBy}
+                        td #{invoice[x].ConfirmDate}
+                        td #{invoice[x].EffectiveDate}
+                        td #{invoice[x].PaymentMethod}
+                        td #{invoice[x].PayerAccountNumber}
+                        td #{invoice[x].LoanTerm}
+                        td #{invoice[x].MaturityDate}
+                        td #{invoice[x].Authorizer}
+    font(size='2', color='red') * Confirm By = Payer, Authorized by = Payee
+    br
+    br
+    p Current Balance ETH:	#{balance.eth} Ether 
+    p Current Balance Token: #{balance.token} BBL
+    form(method='POST', action='/wallets/transfer')
+        #form-group
+            label(for='Select1') Voucher No:
+            select#Select1.form-control(name='VoucherNo')
+                - for(var x=0;x<invoice.length;x++)
+                        if(invoice[x].Stage==3)
+                            if(user._id==invoice[x].AccountPayer)
+                                option #{invoice[x].VoucherNo}
+        br
+        center
+            input.btn.btn-primary(type='submit',value='Submit')
+            a.btn.btn-secondary(href='../', role='button') Back

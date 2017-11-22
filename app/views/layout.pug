@@ -28,6 +28,12 @@ html(lang="eng")
                                     a.dropdown-item(href='/invoices') Invoice Details
                                     a.dropdown-item(href='/invoices/approve') Approve Invoice
                                     a.dropdown-item(href='/invoices/status') Status Invoice
+                            li.nav-item.dropdown
+                                a#dropdown02.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Wallet
+                                .dropdown-menu(aria-labelledby='dropdown02')
+                                    a.dropdown-item(href='/wallets') My Wallet
+                                    a.dropdown-item(href='/wallets/transfer') Transfer Token
+
                 ul.nav.navbar-nav.navbar-right
                     if user
                         li.nav-item
