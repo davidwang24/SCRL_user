@@ -10,6 +10,7 @@ block content
         th(scope='col') Voucher No
         th(scope='col') No of Transactions
         th(scope='col') Total Amount
+        th(scope='col') Outstanding Balance
         th(scope='col') Confirm By
         th(scope='col') Confirm Date
         th(scope='col') Effective Date
@@ -18,6 +19,7 @@ block content
         th(scope='col') Loan Term
         th(scope='col') Maturity Date
         th(scope='col') Authorized by
+        th(scope='col') Invoice Document
         th(scope='col') Status
 
     - for(var x=0;x<invoice.length;x++)
@@ -27,6 +29,7 @@ block content
           td #{invoice[x].VoucherNo}
           td #{invoice[x].NoofTransactions}
           td #{invoice[x].TotalAmount}
+          td #{invoice[x].OutstandingBalance}
           td #{invoice[x].ConfirmBy}
           td #{invoice[x].ConfirmDate}
           td #{invoice[x].EffectiveDate}
@@ -35,13 +38,15 @@ block content
           td #{invoice[x].LoanTerm}
           td #{invoice[x].MaturityDate}
           td #{invoice[x].Authorizer}
-            if(invoice[x].Stage==0)
-              td Not yet approved by Payee
-            if(invoice[x].Stage==1)
-              td Not yet approved by Bank
-            if(invoice[x].Stage==2)
-              td Waiting funds early payment to the payee.
-            if(invoice[x].Stage==3)
-              td Waiting for the Payer to payment the Bank.
-            if(invoice[x].Stage==4)
-              td Complete invoice.
+          td
+            a(href='#') #{invoice[x].InvoiceDocument}
+          if(invoice[x].Stage==0)
+            td Not yet approved by Payee
+          if(invoice[x].Stage==1)
+            td Not yet approved by Bank
+          if(invoice[x].Stage==2)
+            td Waiting funds early payment to the payee.
+          if(invoice[x].Stage==3)
+            td Waiting for the Payer to payment the Bank.
+          if(invoice[x].Stage==4)
+            td Complete invoice.

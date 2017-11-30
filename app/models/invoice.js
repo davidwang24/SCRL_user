@@ -66,6 +66,10 @@ let invoiceSchema = mongoose.Schema({
         InvoiceDocument:{
             type: String,
             require: true
+        },
+        OutstandingBalance:{
+            type: Number,
+            require: true
         }
 });
 

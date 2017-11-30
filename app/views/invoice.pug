@@ -11,11 +11,13 @@ block content
         th(scope='col') Voucher No
         th(scope='col') No of Transactions
         th(scope='col') Total Amount
+        th(scope='col') Outstanding Balance
         th(scope='col') Confirm By
         th(scope='col') Confirm Date
         th(scope='col') Payment Method
         th(scope='col') Payer Account Number
         th(scope='col') Loan Term
+        th(scope='col') Invoice Document
         th(scope='col') Delete
 
     - for(var x=0;x<invoice.length;x++)
@@ -27,11 +29,14 @@ block content
         td #{invoice[x].VoucherNo}
         td #{invoice[x].NoofTransactions}
         td #{invoice[x].TotalAmount}
+        td #{invoice[x].OutstandingBalance}
         td #{invoice[x].ConfirmBy}
         td #{invoice[x].ConfirmDate}
         td #{invoice[x].PaymentMethod}
         td #{invoice[x].PayerAccountNumber}
         td #{invoice[x].LoanTerm}
+        td
+          a(href='#') #{invoice[x].InvoiceDocument}
         td
           if(invoice[x].Stage<=1)
             center

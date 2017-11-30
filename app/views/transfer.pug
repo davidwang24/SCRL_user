@@ -10,6 +10,7 @@ block content
                 th(scope='col') Voucher No
                 th(scope='col') No of Transactions
                 th(scope='col') Total Amount
+                th(scope='col') Outstanding Balance
                 th(scope='col') Confirm By
                 th(scope='col') Confirm Date
                 th(scope='col') Effective Date
@@ -18,6 +19,7 @@ block content
                 th(scope='col') Loan Term
                 th(scope='col') Maturity Date
                 th(scope='col') Authorized by
+                th(scope='col') Invoice Document
         - for(var x=0;x<invoice.length;x++)
             if(invoice[x].Stage==3)
                 if(user._id==invoice[x].AccountPayer)
@@ -26,6 +28,7 @@ block content
                         td #{invoice[x].VoucherNo}
                         td #{invoice[x].NoofTransactions}
                         td #{invoice[x].TotalAmount}
+                        td #{invoice[x].OutstandingBalance}
                         td #{invoice[x].ConfirmBy}
                         td #{invoice[x].ConfirmDate}
                         td #{invoice[x].EffectiveDate}
@@ -34,6 +37,8 @@ block content
                         td #{invoice[x].LoanTerm}
                         td #{invoice[x].MaturityDate}
                         td #{invoice[x].Authorizer}
+                        td
+                            a(href='#') #{invoice[x].InvoiceDocument}
     font(size='2', color='red') * Confirm By = Payer, Authorized by = Payee
     br
     br
@@ -47,6 +52,8 @@ block content
                         if(invoice[x].Stage==3)
                             if(user._id==invoice[x].AccountPayer)
                                 option #{invoice[x].VoucherNo}
+            label Amount:
+            input.form-control(name='Amount', type='text')
         br
         center
             input.btn.btn-primary(type='submit',value='Submit')

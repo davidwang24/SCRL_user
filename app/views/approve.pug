@@ -1,7 +1,7 @@
 extends layout
 block content
   center
-    h2 Approve Invoice Detail
+    h2 Confirm Invoice Detail
   br
   table.table.table-bordered
     thead.thead(style='background-color: #101082; color: white;')
@@ -15,6 +15,7 @@ block content
         th(scope='col') Payment Method
         th(scope='col') Payer Account Number
         th(scope='col') Loan Term
+        th(scope='col') Invoice Document
         th(scope='col') 
 
     - for(var x=0;x<invoice.length;x++)
@@ -29,6 +30,8 @@ block content
           td #{invoice[x].PaymentMethod}
           td #{invoice[x].PayerAccountNumber}
           td #{invoice[x].LoanTerm}
+          td
+            a(href='#') #{invoice[x].InvoiceDocument}
           td
             center
               a.btn.btn-primary.approve-invoice(href='#',data-id=invoice[x]._id) Submit
