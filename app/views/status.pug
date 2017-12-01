@@ -1,7 +1,7 @@
 extends layout
 block content
   center
-    h2 Status Invoice Detail
+    h2 Status Invoice Details
   br
   table.table.table-bordered
     thead.thead(style='background-color: #101082; color: white;')
@@ -21,6 +21,7 @@ block content
         th(scope='col') Authorized by
         th(scope='col') Invoice Document
         th(scope='col') Status
+        th(scope='col') More Invoice Details
 
     - for(var x=0;x<invoice.length;x++)
       if(invoice[x].AccountPayer==id||invoice[x].AccountPayee==id)
@@ -41,12 +42,20 @@ block content
           td
             a(href='#') #{invoice[x].InvoiceDocument}
           if(invoice[x].Stage==0)
-            td Not yet approved by Payee
+            td Not yet confirmed by Payee.
           if(invoice[x].Stage==1)
-            td Not yet approved by Bank
+            td Not yet approved by Bank.
           if(invoice[x].Stage==2)
-            td Waiting funds early payment to the payee.
+            td Waiting funds early payment to the Payee.
           if(invoice[x].Stage==3)
             td Waiting for the Payer to payment the Bank.
           if(invoice[x].Stage==4)
             td Complete invoice.
+          if(invoice[x].Stage==-1)
+            td Invoice is rejected by the Payee.
+          if(invoice[x].Stage==-2)
+            td Invoice is rejected by the Bank.
+          td
+            center
+              a.btn.btn-secondary(href='/invoices/status/'+invoice[x]._id, role='button') More
+  font(size='2', color='red') * Confirm By = Payer, Authorized by = Payee

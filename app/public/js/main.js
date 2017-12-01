@@ -1,13 +1,13 @@
 $(document).ready(function() {
-    $('.delete-invoice').on('click', function(e) {
+    $('.reject-invoice').on('click', function(e) {
      $target = $(e.target);
      const id = $target.attr('data-id');
      $.ajax({
       type: 'DELETE',
       url: '/invoices/' + id,
       success: function(response) {
-       alert('Deleting Invoice');
-       window.location.href = '/invoices';
+       alert('Reject Invoice');
+       window.location.href = '/invoices/confirm';
       },
       error: function(err) {
        console.log(err);
@@ -17,15 +17,15 @@ $(document).ready(function() {
    });
    
    $(document).ready(function() {
-    $('.approve-invoice').on('click', function(e) {
+    $('.confirm-invoice').on('click', function(e) {
      $target = $(e.target);
      const id = $target.attr('data-id');
      $.ajax({
       type: 'GET',
-      url: '/invoices/approve/' + id,
+      url: '/invoices/confirm/' + id,
       success: function(response) {
-       alert('Approve Invoice');
-       window.location.href = '/invoices/approve';
+       alert('Confirm Invoice');
+       window.location.href = '/invoices/confirm';
       },
       error: function(err) {
        console.log(err);

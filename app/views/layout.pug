@@ -26,7 +26,7 @@ html(lang="eng")
                                 .dropdown-menu(aria-labelledby='dropdown02')
                                     a.dropdown-item(href='/invoices/add') Add Invoice
                                     a.dropdown-item(href='/invoices') Invoice Details
-                                    a.dropdown-item(href='/invoices/approve') Confirm Invoice
+                                    a.dropdown-item(href='/invoices/confirm') Confirm Invoice
                                     a.dropdown-item(href='/invoices/status') Status Invoice
                             li.nav-item.dropdown
                                 a#dropdown02.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Wallet
@@ -37,7 +37,7 @@ html(lang="eng")
                 ul.nav.navbar-nav.navbar-right
                     if user
                         li.nav-item
-                            a.nav-link #{user.name}
+                            a.nav-link(href='/users/edit/'+user._id) #{user.name}
                         li.nav-item
                             a.nav-link(href='/users/logout') Logout
                     else

@@ -18,7 +18,6 @@ block content
         th(scope='col') Payer Account Number
         th(scope='col') Loan Term
         th(scope='col') Invoice Document
-        th(scope='col') Delete
 
     - for(var x=0;x<invoice.length;x++)
       tr
@@ -37,7 +36,3 @@ block content
         td #{invoice[x].LoanTerm}
         td
           a(href='#') #{invoice[x].InvoiceDocument}
-        td
-          if(invoice[x].Stage<=1)
-            center
-              a.btn.btn-danger.delete-invoice(href='#',data-id=invoice[x]._id) Delete

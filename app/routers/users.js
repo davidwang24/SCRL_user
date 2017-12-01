@@ -86,4 +86,63 @@ router.get('/logout', function(req, res) {
  res.redirect('/users/login');
 });
 
+// load edit form
+router.get('/edit/:id', function(req, res) {
+ User.findById(req.params.id, function(err, user) {
+  res.render('edit_user', {
+   user: user
+  });
+ });
+});
+
+// update submit POST route
+router.post('/edit/:id', function(req, res) {
+ let user = {};
+ user.name = req.body.name;
+ user.email = req.body.email;
+ user.username = req.body.username;
+ user.password = req.body.password;
+ const name = req.body.name;
+ const email = req.body.email;
+ const username = req.body.username;
+ const password = req.body.password;
+ const password2 = req.body.password2;
+
+ req.checkBody('name', 'Name is required').notEmpty();
+ req.checkBody('email', 'Email is required').notEmpty();
+ req.checkBody('email', 'Email is not valid').isEmail();
+ req.checkBody('username', 'Username is required').notEmpty();
+ req.checkBody('password', 'Password is required').notEmpty();
+ req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+
+ let errors = req.validationErrors();
+
+ if (errors) {
+  res.render('register', {
+   errors: errors
+  });
+ } else {
+  bcrypt.genSalt(10, function(err, salt) {
+   bcrypt.hash(user.password, salt, function(err, hash) {
+    if (err) {
+     console.log(err);
+    }
+    user.password = hash;
+    let query = {
+     _id: req.params.id
+    }
+    User.update(query, user, function(err) {
+     if (err) {
+      console.log(err);
+      return;
+     } else {
+      req.flash('success', 'User Updated');
+      res.redirect('/../');
+     }
+    });
+   });
+  });
+ }
+});
+
 module.exports = router;

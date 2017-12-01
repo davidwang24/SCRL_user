@@ -1,0 +1,88 @@
+extends layout
+block content
+    center
+        h2 Invoice Details
+    br
+    h3 Status
+    .row
+        if(invoice[0].Stage==0)
+            .col Not yet confirmed by Payee.
+        if(invoice[0].Stage==1)
+            .col Not yet approved by Bank.
+        if(invoice[0].Stage==2)
+            .col Waiting funds early payment to the Payee.
+        if(invoice[0].Stage==3)
+            .col Waiting for the Payer to payment the Bank.
+        if(invoice[0].Stage==4)
+            .col Complete invoice.
+        if(invoice[0].Stage==-1)
+            .col Invoice is rejected by the Payee.
+        if(invoice[0].Stage==-2)
+            .col Invoice is rejected by the Bank.
+    br
+    h3 Invoice Details
+    .row
+        .col Voucher No: #{invoice[0].VoucherNo}
+        .col No of Transactions: #{invoice[0].NoofTransactions}
+        .w-100
+        .col Total Amount: #{invoice[0].TotalAmount}
+        .col Outstanding Balance: #{invoice[0].OutstandingBalance}
+        
+        .w-100
+        .col Confirm By: #{invoice[0].ConfirmBy}
+        .col Confirm Date: #{invoice[0].ConfirmDate}
+        .w-100
+        .col Payment Method: #{invoice[0].PaymentMethod}
+        if(invoice[0].PaymentMethod=='Cash')
+            .w-100
+            .col Payer Account Number: #{invoice[0].PayerAccountNumber}
+        else
+            .w-100
+            .col Loan Term: #{invoice[0].LoanTerm}
+            .col Maturity Date: #{invoice[0].MaturityDate}
+        .w-100
+        .col Authorized by: #{invoice[0].Authorizer}
+    br
+    h3 Payer details
+    .row
+        - for(var y=0;y<users.length;y++)
+            if(invoice[0].AccountPayer==users[y]._id)
+                .col Name: #{users[y].name}
+                .col Email: #{users[y].email}
+        - for(var x=0;x<company.length;x++)
+            if(invoice[0].AccountPayer==company[x].Account)
+                .w-100
+                .col Company Code: #{company[x].CompanyCode}
+                .col Company Group: #{company[x].CompanyGroup}
+                .w-100
+                .col Tax ID: #{company[x].TaxID}
+                .col Name Thai: #{company[x].NameThai}
+                .w-100
+                .col Name English: #{company[x].NameEnglish}
+                .col Business Type: #{company[x].BusinessType}
+    br
+    h3 Payee details
+    .row
+        - for(var y=0;y<users.length;y++)
+            if(invoice[0].AccountPayee==users[y]._id)
+                .col Name: #{users[y].name}
+                .col Email: #{users[y].email}
+        - for(var x=0;x<company.length;x++)
+            if(invoice[0].AccountPayee==company[x].Account)
+                .w-100
+                .col Company Code: #{company[x].CompanyCode}
+                .col Company Group: #{company[x].CompanyGroup}
+                .w-100
+                .col Tax ID: #{company[x].TaxID}
+                .col Name Thai: #{company[x].NameThai}
+                .w-100
+                .col Name English: #{company[x].NameEnglish}
+                .col Business Type: #{company[x].BusinessType}
+    br
+    h3 Upload Invoice Document
+    .row
+        .col Invoice Document:
+            a(href='#') #{invoice[0].InvoiceDocument}
+    br
+    center
+        a.btn.btn-secondary(href='./', role='button') Back

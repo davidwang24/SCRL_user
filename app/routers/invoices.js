@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
 });
 
 // add route
-router.get('/add', ensureAuthenticated, function(req, res) {
+router.get('/add', function(req, res) {
  Company.find({}, function(err, company) {
   if (err) {
    console.log(err);
@@ -69,7 +69,6 @@ router.post('/add', function(req, res) {
   });
  } else {
   var today = new Date();
-  //today.setDate(today.getDate() + 7);
   var dd = today.getDate();
   var mm = today.getMonth() + 1; //January is 0!
   var yyyy = today.getFullYear();
@@ -114,14 +113,19 @@ router.post('/add', function(req, res) {
  }
 });
 
-// delete invoice
+// reject invoice
 router.delete('/:id', function(req, res) {
  let query = {
   _id: req.params.id
  }
- Invoice.remove(query, function(err) {
+ Invoice.findByIdAndUpdate(query, {
+  $set: {
+   Stage: -1,
+  }
+ }, function(err, invoice) {
   if (err) {
    console.log(err);
+   return;
   }
   res.send('Success');
  });
@@ -137,7 +141,7 @@ function ensureAuthenticated(req, res, next) {
  }
 }
 
-router.get('/approve', function(req, res) {
+router.get('/confirm', function(req, res) {
  let temp = req.user._id;
  Invoice.find({
   "AccountPayee": temp
@@ -145,15 +149,15 @@ router.get('/approve', function(req, res) {
   if (err) {
    console.log(err);
   } else {
-   res.render('approve', {
+   res.render('confirm', {
     invoice: invoice
    });
   }
  });
 });
 
-// approve invoice
-router.get('/approve/:id', function(req, res) {
+// confirm invoice
+router.get('/confirm/:id', function(req, res) {
  let query = {
   _id: req.params.id
  }
@@ -180,6 +184,36 @@ router.get('/status', function(req, res) {
    res.render('status', {
     invoice: invoice,
     id: req.user._id
+   });
+  }
+ });
+});
+
+// invoice detalis
+router.get('/status/:id', function(req, res) {
+ let temp = req.params.id;
+ Invoice.find({
+  "_id": temp
+ }, function(err, invoice) {
+  if (err) {
+   console.log(err);
+  } else {
+   User.find({}, function(err, users) {
+    if (err) {
+     console.log(err);
+    } else {
+     Company.find({}, function(err, company) {
+      if (err) {
+       console.log(err);
+      } else {
+       res.render('detail_invoice', {
+        invoice: invoice,
+        users: users,
+        company: company
+       });
+      }
+     });
+    }
    });
   }
  });

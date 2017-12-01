@@ -16,7 +16,8 @@ block content
         th(scope='col') Payer Account Number
         th(scope='col') Loan Term
         th(scope='col') Invoice Document
-        th(scope='col') 
+        th(scope='col') Confirm Invoice
+        th(scope='col') Reject Invoice
 
     - for(var x=0;x<invoice.length;x++)
       - if(invoice[x].Stage==0)
@@ -31,7 +32,10 @@ block content
           td #{invoice[x].PayerAccountNumber}
           td #{invoice[x].LoanTerm}
           td
-            a(href='#') #{invoice[x].InvoiceDocument}
+            a(href='/uploads/invoices/'+invoice[x].InvoiceDocument) #{invoice[x].InvoiceDocument}
           td
             center
-              a.btn.btn-primary.approve-invoice(href='#',data-id=invoice[x]._id) Submit
+              a.btn.btn-primary.confirm-invoice(href='#',data-id=invoice[x]._id) Confirm
+          td
+            center
+              a.btn.btn-danger.reject-invoice(href='#',data-id=invoice[x]._id) Reject
