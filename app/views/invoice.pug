@@ -15,7 +15,6 @@ block content
         th(scope='col') Confirm By
         th(scope='col') Confirm Date
         th(scope='col') Payment Method
-        th(scope='col') Payer Account Number
         th(scope='col') Loan Term
         th(scope='col') Invoice Document
 
@@ -32,7 +31,6 @@ block content
         td #{invoice[x].ConfirmBy}
         td #{invoice[x].ConfirmDate}
         td #{invoice[x].PaymentMethod}
-        td #{invoice[x].PayerAccountNumber}
         td #{invoice[x].LoanTerm}
         td
-          a(href='#') #{invoice[x].InvoiceDocument}
+          a(href='/uploads/invoices/'+invoice[x].InvoiceDocument) #{invoice[x].InvoiceDocument}

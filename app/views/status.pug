@@ -15,7 +15,6 @@ block content
         th(scope='col') Confirm Date
         th(scope='col') Effective Date
         th(scope='col') Payment Method
-        th(scope='col') Payer Account Number
         th(scope='col') Loan Term
         th(scope='col') Maturity Date
         th(scope='col') Authorized by
@@ -35,12 +34,11 @@ block content
           td #{invoice[x].ConfirmDate}
           td #{invoice[x].EffectiveDate}
           td #{invoice[x].PaymentMethod}
-          td #{invoice[x].PayerAccountNumber}
           td #{invoice[x].LoanTerm}
           td #{invoice[x].MaturityDate}
           td #{invoice[x].Authorizer}
           td
-            a(href='#') #{invoice[x].InvoiceDocument}
+            a(href='/uploads/invoices/'+invoice[x].InvoiceDocument) #{invoice[x].InvoiceDocument}
           if(invoice[x].Stage==0)
             td Not yet confirmed by Payee.
           if(invoice[x].Stage==1)

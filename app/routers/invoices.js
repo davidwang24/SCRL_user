@@ -89,7 +89,6 @@ router.post('/add', function(req, res) {
   invoice.TotalAmount = req.body.TotalAmount;
   invoice.OutstandingBalance = req.body.TotalAmount;
   invoice.PaymentMethod = req.body.Radio;
-  invoice.PayerAccountNumber = req.body.PayerAccountNumber;
   invoice.LoanTerm = req.body.LoanTerm;
   invoice.InvoiceDocument = req.body.InvoiceDocument;
   let temp = req.body.PayeeCompany;

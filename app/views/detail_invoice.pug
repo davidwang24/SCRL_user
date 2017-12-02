@@ -33,10 +33,7 @@ block content
         .col Confirm Date: #{invoice[0].ConfirmDate}
         .w-100
         .col Payment Method: #{invoice[0].PaymentMethod}
-        if(invoice[0].PaymentMethod=='Cash')
-            .w-100
-            .col Payer Account Number: #{invoice[0].PayerAccountNumber}
-        else
+        if(invoice[0].PaymentMethod=='Finance')
             .w-100
             .col Loan Term: #{invoice[0].LoanTerm}
             .col Maturity Date: #{invoice[0].MaturityDate}
@@ -82,7 +79,7 @@ block content
     h3 Upload Invoice Document
     .row
         .col Invoice Document:
-            a(href='#') #{invoice[0].InvoiceDocument}
+            a(href='/uploads/invoices/'+invoice[0].InvoiceDocument) #{invoice[0].InvoiceDocument}
     br
     center
         a.btn.btn-secondary(href='./', role='button') Back

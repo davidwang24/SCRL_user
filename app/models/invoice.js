@@ -55,10 +55,6 @@ let invoiceSchema = mongoose.Schema({
             type: String,
             require: true
         },
-        PayerAccountNumber:{
-            type: String,
-            require: true
-        },
         LoanTerm:{
             type: Number,
             require: true

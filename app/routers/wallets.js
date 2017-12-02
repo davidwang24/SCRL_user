@@ -10,6 +10,8 @@ var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 let Company = require('../models/company');
 // invoice model
 let Invoice = require('../models/invoice');
+// invoice model
+let Transaction = require('../models/transaction');
 
 var token;
 // setup contract
@@ -122,8 +124,47 @@ router.post('/transfer', function(req, res) {
           if (err) {
            console.log(err);
           } else {
-           req.flash('success', 'Voucher No: ' + invoice2.VoucherNo + ' Transfer is Complete');
-           res.redirect('/wallets/transfer');
+            var date = (web3.eth.getBlock((web3.eth.getTransaction(v.logs[0].transactionHash)).blockNumber).timestamp)
+            var date2 = new Date(date*1000);
+            var dd = date2.getDate();
+            var mm = date2.getMonth() + 1; //January is 0!
+            var yyyy = date2.getFullYear();
+            var h = date2.getHours();
+            var m = date2.getMinutes();
+            var s = date2.getSeconds();
+            if (dd < 10) {
+            dd = '0' + dd;
+            }
+            if (mm < 10) {
+            mm = '0' + mm;
+            }
+            if (h < 10) {
+              h = '0' + h;
+            }
+            if (m < 10) {
+              m = '0' + m;
+            }
+            if (s < 10) {
+              s = '0' + s;
+            }
+            var Timestamp = dd + '/' + mm + '/' + yyyy + ' '+ h + ':' + m + ':' + s;
+            let transaction = new Transaction();
+            transaction.TxHash = v.logs[0].transactionHash;
+            transaction.TxReceiptStatus = v.receipt.status;
+            transaction.Timestamp = Timestamp;
+            transaction.From = v.logs[0].args.from;
+            transaction.To = v.logs[0].args.to;
+            transaction.Quantity = v.logs[0].args.value.toNumber();
+            transaction.Event = v.logs[0].event;
+            transaction.save(function(err) {
+              if (err) {
+               console.log(err);
+               return;
+              } else {
+                req.flash('success', 'Voucher No: ' + invoice2.VoucherNo + ' Transfer is Complete');
+                res.redirect('/wallets/transfer');
+              }
+             });
           }
          });
         }).catch(function(err) {
@@ -161,8 +202,47 @@ router.post('/transfer', function(req, res) {
            if (err) {
             console.log(err);
            } else {
-            req.flash('success', 'Voucher No: ' + invoice2.VoucherNo + ' Transfer is Complete');
-            res.redirect('/wallets/transfer');
+            var date = (web3.eth.getBlock((web3.eth.getTransaction(v.logs[0].transactionHash)).blockNumber).timestamp)
+            var date2 = new Date(date*1000);
+            var dd = date2.getDate();
+            var mm = date2.getMonth() + 1; //January is 0!
+            var yyyy = date2.getFullYear();
+            var h = date2.getHours();
+            var m = date2.getMinutes();
+            var s = date2.getSeconds();
+            if (dd < 10) {
+            dd = '0' + dd;
+            }
+            if (mm < 10) {
+            mm = '0' + mm;
+            }
+            if (h < 10) {
+              h = '0' + h;
+            }
+            if (m < 10) {
+              m = '0' + m;
+            }
+            if (s < 10) {
+              s = '0' + s;
+            }
+            var Timestamp = dd + '/' + mm + '/' + yyyy + ' '+ h + ':' + m + ':' + s;
+            let transaction = new Transaction();
+            transaction.TxHash = v.logs[0].transactionHash;
+            transaction.TxReceiptStatus = v.receipt.status;
+            transaction.Timestamp = Timestamp;
+            transaction.From = v.logs[0].args.from;
+            transaction.To = v.logs[0].args.to;
+            transaction.Quantity = v.logs[0].args.value.toNumber();
+            transaction.Event = v.logs[0].event;
+            transaction.save(function(err) {
+              if (err) {
+               console.log(err);
+               return;
+              } else {
+                req.flash('success', 'Voucher No: ' + invoice2.VoucherNo + ' Transfer is Complete');
+                res.redirect('/wallets/transfer');
+              }
+             });
            }
           });
          } else {
@@ -175,8 +255,47 @@ router.post('/transfer', function(req, res) {
            if (err) {
             console.log(err);
            } else {
-            req.flash('success', 'Voucher No: ' + invoice2.VoucherNo + ' Transfer is Complete');
-            res.redirect('/wallets/transfer');
+            var date = (web3.eth.getBlock((web3.eth.getTransaction(v.logs[0].transactionHash)).blockNumber).timestamp)
+            var date2 = new Date(date*1000);
+            var dd = date2.getDate();
+            var mm = date2.getMonth() + 1; //January is 0!
+            var yyyy = date2.getFullYear();
+            var h = date2.getHours();
+            var m = date2.getMinutes();
+            var s = date2.getSeconds();
+            if (dd < 10) {
+            dd = '0' + dd;
+            }
+            if (mm < 10) {
+            mm = '0' + mm;
+            }
+            if (h < 10) {
+              h = '0' + h;
+            }
+            if (m < 10) {
+              m = '0' + m;
+            }
+            if (s < 10) {
+              s = '0' + s;
+            }
+            var Timestamp = dd + '/' + mm + '/' + yyyy + ' '+ h + ':' + m + ':' + s;
+            let transaction = new Transaction();
+            transaction.TxHash = v.logs[0].transactionHash;
+            transaction.TxReceiptStatus = v.receipt.status;
+            transaction.Timestamp = Timestamp;
+            transaction.From = v.logs[0].args.from;
+            transaction.To = v.logs[0].args.to;
+            transaction.Quantity = v.logs[0].args.value.toNumber();
+            transaction.Event = v.logs[0].event;
+            transaction.save(function(err) {
+              if (err) {
+               console.log(err);
+               return;
+              } else {
+                req.flash('success', 'Voucher No: ' + invoice2.VoucherNo + ' Transfer is Complete');
+                res.redirect('/wallets/transfer');
+              }
+             });
            }
           });
          }

@@ -30,11 +30,14 @@ block content
     br
     h3 Upload Company Document
     .row
-      .col Company Document: #{company[x].CompanyDocument}
+      .col Company Document: 
+        a(href='/uploads/companys/'+company[x].CompanyDocument) #{company[x].CompanyDocument}
     br
     h3 Ethereum Account
     .row
-      .col Ethereum Account: #{company[x].ETHAccount}
+      .col Ethereum Account: 
+        a(href='/wallets') #{company[x].ETHAccount}
+      
     br
     center
       a.btn.btn-primary(href='/companys/edit/'+company[x]._id) Edit
