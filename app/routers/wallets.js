@@ -3,7 +3,7 @@ const router = express.Router();
 const moment = require('moment');
 const Web3 = require('web3');
 const contract = require('truffle-contract');
-const tokenContract = require('../../../SCF-Solution_official/build/contracts/Token.json');
+const tokenContract = require('../../../SCRL_officer/build/contracts/Token.json');
 var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
 // company model
